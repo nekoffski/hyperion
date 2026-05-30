@@ -2,7 +2,7 @@
 
 #include "Random.hh"
 
-namespace hyp {
+namespace hyperion {
 
 Tag<Str> Tag<Str>::fromUuid() { return Tag<Str>{RandomEngine::get().uuid()}; }
 
@@ -13,4 +13,4 @@ Range Range::aligned(u64 offset, u64 size, u64 granularity) {
     };
 }
 
-}  // namespace hyp
+}  // namespace hyperion

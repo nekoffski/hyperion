@@ -5,7 +5,7 @@
 
 #include "Concepts.hh"
 
-namespace hyp {
+namespace hyperion {
 
 namespace details {
 
@@ -77,4 +77,4 @@ constexpr auto lazyEvaluate(F&& f) {
 
 #define LAZY_EVALUATE(expr) lazyEvaluate([&]() { return (expr); })
 
-}  // namespace hyp
+}  // namespace hyperion

@@ -7,7 +7,7 @@
 #include "Core.hh"
 #include "Error.hh"
 
-namespace hyp {
+namespace hyperion {
 
 template <typename T>
 class Pool : public NonCopyable, public NonMovable {
@@ -64,4 +64,4 @@ class Pool : public NonCopyable, public NonMovable {
     std::vector<std::optional<T>> m_pool;
 };
 
-}  // namespace hyp
+}  // namespace hyperion

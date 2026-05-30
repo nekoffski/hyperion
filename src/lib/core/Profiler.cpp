@@ -7,7 +7,7 @@
 
 #include "Scope.hh"
 
-namespace hyp {
+namespace hyperion {
 
 static constexpr f64 toMS(f64 nanoseconds) {
     return static_cast<f64>(nanoseconds) / 1'000'000.0;
@@ -171,4 +171,4 @@ void ProfilerSummary::forEachNodeImpl(
     }
 }
 
-}  // namespace hyp
+}  // namespace hyperion

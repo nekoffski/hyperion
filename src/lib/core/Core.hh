@@ -6,7 +6,7 @@
 #include <limits>
 #include <optional>
 
-namespace hyp {
+namespace hyperion {
 
 using u64 = uint64_t;
 using u32 = uint32_t;
@@ -92,18 +92,18 @@ class Tag<Str> : public Wrapper<Str> {
     static Tag<Str> fromUuid();
 };
 
-}  // namespace hyp
+}  // namespace hyperion
 
 template <typename T>
-struct std::hash<hyp::Wrapper<T>> {
-    std::size_t operator()(const hyp::Wrapper<T>& v) const noexcept {
+struct std::hash<hyperion::Wrapper<T>> {
+    std::size_t operator()(const hyperion::Wrapper<T>& v) const noexcept {
         return std::hash<T>{}(v.get());
     }
 };
 
 template <typename T>
-struct std::hash<hyp::Tag<T>> {
-    std::size_t operator()(const hyp::Tag<T>& v) const noexcept {
+struct std::hash<hyperion::Tag<T>> {
+    std::size_t operator()(const hyperion::Tag<T>& v) const noexcept {
         return std::hash<T>{}(v.get());
     }
 };

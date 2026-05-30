@@ -3,7 +3,7 @@
 #include <concepts>
 #include <utility>
 
-namespace hyp {
+namespace hyperion {
 
 struct StaticClass {
     StaticClass() = delete;
@@ -56,4 +56,4 @@ concept Countable = requires(T& t) {
     { t.size() };
 };
 
-}  // namespace hyp
+}  // namespace hyperion

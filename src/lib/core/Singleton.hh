@@ -5,7 +5,7 @@
 #include "Log.hh"
 #include "RTTI.hh"
 
-namespace hyp {
+namespace hyperion {
 
 template <typename T>
 class Singleton : public virtual NonMovable, public virtual NonCopyable {
@@ -36,4 +36,4 @@ class UniqueInstance : public virtual NonMovable, public virtual NonCopyable {
     inline static bool s_instanceExists = false;
 };
 
-}  // namespace hyp
+}  // namespace hyperion

@@ -2,7 +2,7 @@
 
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-namespace hyp::log {
+namespace hyperion::log {
 
 void init(const LoggerOptions& options) {
     auto colorSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
@@ -58,4 +58,4 @@ void setLogLevel(Level level) {
     }
 }
 
-}  // namespace hyp::log
+}  // namespace hyperion::log

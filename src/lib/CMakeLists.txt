@@ -1,4 +1,5 @@
 add_library(hyperion SHARED
+    "Platform.cpp"
     # -- core
     "core/Config.cpp"
     "core/String.cpp"
@@ -9,6 +10,10 @@ add_library(hyperion SHARED
     "core/FileSystem.cpp"
     "core/Random.cpp"
     "core/Profiler.cpp"
+    # -- runtime
+    "runtime/Thread.cpp"
+    "runtime/Process.cpp"
+    "runtime/unix/UnixProcess.cpp"
 )
 
 target_include_directories(hyperion

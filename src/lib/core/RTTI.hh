@@ -6,7 +6,7 @@
 
 #include "Concepts.hh"
 
-namespace hyp {
+namespace hyperion {
 
 struct RTTI : public virtual NonCopyable, public virtual NonMovable {
     virtual std::type_index getType() const = 0;
@@ -26,4 +26,4 @@ std::string getTypeName() {
     return boost::core::demangle(typeid(T).name());
 }
 
-}  // namespace hyp
+}  // namespace hyperion

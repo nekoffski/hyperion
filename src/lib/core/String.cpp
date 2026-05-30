@@ -1,6 +1,6 @@
 #include "String.hh"
 
-namespace hyp {
+namespace hyperion {
 
 std::vector<std::string> split(
     const std::string& input, const std::string& separator
@@ -39,4 +39,4 @@ std::optional<std::string> extensionFromPath(
     return {};
 }
 
-}  // namespace hyp
+}  // namespace hyperion

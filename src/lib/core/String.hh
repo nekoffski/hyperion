@@ -7,7 +7,7 @@
 
 #include "Core.hh"
 
-namespace hyp {
+namespace hyperion {
 
 template <u64 N>
 struct StringLiteral {
@@ -38,4 +38,4 @@ std::vector<std::string> split(
     const std::string& input, const std::string& separator
 );
 
-}  // namespace hyp
+}  // namespace hyperion

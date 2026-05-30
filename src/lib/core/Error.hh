@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace hyp {
+namespace hyperion {
 
 enum class ErrorCode {
     none = 0,
@@ -23,7 +23,7 @@ class Exception : public std::exception {
         : m_code(code),
           m_message(fmt::format(fmt::runtime(fmt), std::forward<Args>(args)...)
           ) {}
-          
+
     template <typename... Args>
     explicit Exception(const std::string& fmt, Args&&... args)
         : m_code(ErrorCode::none),
@@ -61,4 +61,4 @@ class Exception : public std::exception {
             : base(code, fmt, std::forward<Args>(args)...) {}                 \
     };
 
-}  // namespace hyp
+}  // namespace hyperion

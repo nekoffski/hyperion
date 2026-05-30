@@ -4,7 +4,7 @@
 
 #include "Macros.hh"
 
-namespace hyp::details {
+namespace hyperion::details {
 
 template <typename Callback, typename Condition>
 class ScopeGuard {
@@ -75,10 +75,10 @@ ScopeGuard<Callback, decltype(_ScopeGuardOnSuccessCondition{})> operator+(
     );
 }
 
-}  // namespace hyp::details
+}  // namespace hyperion::details
 
 // clang-format off
-#define ON_SCOPE_EXIT    auto ANONYMOUS_VAR(SCOPE_EXIT)    = hyp::details::_ScopeGuardOnExit      {} + [&]()
-#define ON_SCOPE_FAIL    auto ANONYMOUS_VAR(SCOPE_FAIL)    = hyp::details::_ScopeGuardOnFailure   {} + [&]()
-#define ON_SCOPE_SUCCESS auto ANONYMOUS_VAR(SCOPE_SUCCESS) = hyp::details::_ScopeGuardOnSuccess   {} + [&]()
+#define ON_SCOPE_EXIT    auto ANONYMOUS_VAR(SCOPE_EXIT)    = hyperion::details::_ScopeGuardOnExit      {} + [&]()
+#define ON_SCOPE_FAIL    auto ANONYMOUS_VAR(SCOPE_FAIL)    = hyperion::details::_ScopeGuardOnFailure   {} + [&]()
+#define ON_SCOPE_SUCCESS auto ANONYMOUS_VAR(SCOPE_SUCCESS) = hyperion::details::_ScopeGuardOnSuccess   {} + [&]()
 // clang-format on

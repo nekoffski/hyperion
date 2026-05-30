@@ -3,7 +3,7 @@
 #include "Concepts.hh"
 #include "Log.hh"
 
-namespace hyp {
+namespace hyperion {
 
 template <typename T>
 class ServiceLocator : public StaticClass {
@@ -30,4 +30,4 @@ class ServiceLocator : public StaticClass {
     inline static T* s_instance{nullptr};
 };
 
-}  // namespace hyp
+}  // namespace hyperion

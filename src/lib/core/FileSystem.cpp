@@ -5,7 +5,7 @@
 
 namespace fs = std::filesystem;
 
-namespace hyp {
+namespace hyperion {
 
 const std::string& Path::str() const { return m_path; }
 
@@ -110,4 +110,4 @@ void File::remove() {
     }
 }
 
-}  // namespace hyp
+}  // namespace hyperion

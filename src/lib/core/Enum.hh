@@ -34,7 +34,7 @@ constexpr auto operator&=(T& a, T b) {
     return a = a & b;
 }
 
-namespace hyp {
+namespace hyperion {
 
 bool checkFlag(auto value, auto flag) {
     using T = std::decay_t<decltype(value)>;
@@ -51,4 +51,4 @@ bool checkFlag(auto value, auto flag) {
 
 #define hyp_BIT_ENUM(name) constexpr void enableBitOperations(name);
 
-}  // namespace hyp
+}  // namespace hyperion

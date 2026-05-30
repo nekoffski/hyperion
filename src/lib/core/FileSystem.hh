@@ -6,7 +6,7 @@
 #include "Error.hh"
 #include "Singleton.hh"
 
-namespace hyp {
+namespace hyperion {
 
 DEFINE_ERROR(FileSystemError);
 
@@ -52,4 +52,4 @@ class File {
 
 class Directory {};
 
-}  // namespace hyp
+}  // namespace hyperion

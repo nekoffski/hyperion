@@ -2,9 +2,9 @@
 
 #include <functional>
 
-#include "hyp/core/Concepts.hh"
+#include "Concepts.hh"
 
-namespace hyp {
+namespace hyperion {
 
 template <typename T>
 class Scoped : public NonCopyable {
@@ -54,4 +54,4 @@ class Scoped : public NonCopyable {
     bool m_empty{true};
 };
 
-}  // namespace hyp
+}  // namespace hyperion

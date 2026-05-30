@@ -1,17 +1,11 @@
 #include "Error.hh"
 
-namespace hyp {
+namespace hyperion {
 
-const std::string& Exception::message() const {
-    return m_message;
-}
+const std::string& Exception::message() const { return m_message; }
 
-ErrorCode Exception::code() const {
-    return m_code;
-}
+ErrorCode Exception::code() const { return m_code; }
 
-const char* Exception::what() const noexcept {
-    return m_message.c_str();
-}
+const char* Exception::what() const noexcept { return m_message.c_str(); }
 
-}  // namespace hyp
+}  // namespace hyperion

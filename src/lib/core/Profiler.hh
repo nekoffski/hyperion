@@ -9,7 +9,7 @@
 #include "Singleton.hh"
 #include "Time.hh"
 
-namespace hyp {
+namespace hyperion {
 
 struct ProfilerEvent {
     enum class Type { begin, end };
@@ -96,20 +96,21 @@ class Profiler : public Singleton<Profiler> {
     ProfilerEventsPerThread m_threads;
 };
 
-}  // namespace hyp
+}  // namespace hyperion
 
 #ifdef hyp_ENABLE_PROFILING
 
-#define hyp_PROFILE_REGION(name) \
-    auto ANONYMOUS_VAR(REGION_TIMER) = hyp::Profiler::get().profileRegion(name)
+#define hyp_PROFILE_REGION(name)       \
+    auto ANONYMOUS_VAR(REGION_TIMER) = \
+        hyperion::Profiler::get().profileRegion(name)
 
 #define hyp_PROFILE_FUNCTION()           \
     auto ANONYMOUS_VAR(FUNCTION_TIMER) = \
-        hyp::Profiler::get().profileRegion(__func__)
+        hyperion::Profiler::get().profileRegion(__func__)
 
-#define hyp_PROFILE_REGISTER_THREAD() hyp::Profiler::get().registerThread()
+#define hyp_PROFILE_REGISTER_THREAD() hyperion::Profiler::get().registerThread()
 #define hyp_PROFILE_DUMP_SUMMARY() \
-    hyp::Profiler::get().generateSummary().print()
+    hyperion::Profiler::get().generateSummary().print()
 
 #else
 

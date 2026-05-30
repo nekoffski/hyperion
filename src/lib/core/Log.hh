@@ -11,7 +11,7 @@
 #include "Core.hh"
 #include "Error.hh"
 
-namespace hyp::log {
+namespace hyperion::log {
 
 enum class Level {
     trace,
@@ -156,4 +156,4 @@ void warn(details::FormatWithLocation fmt, Args&&... args) {
 
 }  // namespace internal
 
-}  // namespace hyp::log
+}  // namespace hyperion::log
