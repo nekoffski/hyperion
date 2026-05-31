@@ -5,6 +5,7 @@
 #include "lib/core/Concepts.hh"
 #include "lib/core/Core.hh"
 #include "lib/runtime/Process.hh"
+#include "lib/runtime/Signal.hh"
 
 namespace hyperion {
 
@@ -30,6 +31,7 @@ class Platform : public StaticClass {
 
    private:
     static std::unique_ptr<ProcessManager::Impl> s_processManager;
+    static std::unique_ptr<SignalManager::Impl> s_signalManager;
 };
 
 }  // namespace hyperion

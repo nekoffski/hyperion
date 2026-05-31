@@ -14,6 +14,7 @@ enum class ErrorCode {
     outOfRange,
     fileNotFound,
     directoryNotFound,
+    invalidEnumValue,
 };
 
 class Exception : public std::exception {
@@ -60,5 +61,7 @@ class Exception : public std::exception {
         explicit name(ErrorCode code, const std::string& fmt, Args&&... args) \
             : base(code, fmt, std::forward<Args>(args)...) {}                 \
     };
+
+DEFINE_ERROR(RuntimeError);
 
 }  // namespace hyperion

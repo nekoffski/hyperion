@@ -10,8 +10,15 @@ namespace hyperion {
 
 class Thread : public NonCopyable, public NonMovable {
    public:
+    ~Thread();
+
     void start();
     void join();
+
+    virtual void cancel() {}
+
+   protected:
+    void sleepFor(std::chrono::milliseconds duration);
 
    private:
     virtual void run() = 0;
@@ -23,6 +30,7 @@ class ThreadGroup : public NonCopyable, public NonMovable {
    public:
     void start();
     void join();
+    void cancel();
 
     template <typename T, typename... Args>
         requires std::derived_from<T, Thread> &&

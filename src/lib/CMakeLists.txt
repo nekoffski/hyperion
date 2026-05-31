@@ -13,7 +13,9 @@ add_library(hyperion SHARED
     # -- runtime
     "runtime/Thread.cpp"
     "runtime/Process.cpp"
+    "runtime/Signal.cpp"
     "runtime/unix/UnixProcess.cpp"
+    "runtime/unix/UnixSignal.cpp"
 )
 
 target_include_directories(hyperion
@@ -27,6 +29,7 @@ target_link_libraries(hyperion
         spdlog::spdlog
         tomlplusplus::tomlplusplus
         stduuid::stduuid
+        asio::asio
 )
 
 set_target_properties(hyperion PROPERTIES POSITION_INDEPENDENT_CODE ON)

@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "Core.hh"
 #include "Error.hh"
-#include "Singleton.hh"
 
 namespace hyperion {
 

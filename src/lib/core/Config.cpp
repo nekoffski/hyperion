@@ -1,10 +1,10 @@
 #include "Config.hh"
 
-#include <boost/algorithm/string.hpp>
 #include <toml++/toml.hpp>
 
 #include "FileSystem.hh"
 #include "Log.hh"
+#include "String.hh"
 
 namespace hyperion {
 
@@ -92,7 +92,7 @@ static log::Level parseLogLevel(const Str& levelStr) {
         {"off", log::Level::off},
     };
 
-    auto it = levelMap.find(boost::algorithm::to_lower_copy(levelStr));
+    auto it = levelMap.find(levelStr);
     log::expect(
         it != levelMap.end(),
         "Invalid log level '{}', must be one of: trace, debug, info, warn, "
@@ -128,11 +128,14 @@ void Config::parseVersionFile(const Path& path) {
     File f{path};
     auto versionStr = f.read();
 
-    if (versionStr.back() == '\n') versionStr.pop_back();
-    if (versionStr.front() == 'v') versionStr.erase(0, 1);
+    if (versionStr.back() == '\n') {
+        versionStr.pop_back();
+    }
+    if (versionStr.front() == 'v') {
+        versionStr.erase(0, 1);
+    }
 
-    std::vector<Str> parts;
-    boost::algorithm::split(parts, versionStr, boost::is_any_of("."));
+    auto parts = split(versionStr, ".");
 
     log::expect(
         parts.size() == 3, "Version file must be in the format vx.y.z, got {}",

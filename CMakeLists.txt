@@ -10,6 +10,7 @@ find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(tomlplusplus CONFIG REQUIRED)
 find_package(stduuid REQUIRED)
+find_package(asio REQUIRED)
 
 add_subdirectory(src/lib)
 add_subdirectory(src/daemon)

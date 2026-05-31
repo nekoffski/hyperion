@@ -3,14 +3,11 @@
 #include "Concepts.hh"
 #include "Core.hh"
 #include "Log.hh"
-#include "RTTI.hh"
 
 namespace hyperion {
 
 template <typename T>
 class Singleton : public virtual NonMovable, public virtual NonCopyable {
-    inline static std::string className = getTypeName<T>();
-
    public:
     [[nodiscard]] static T& get() {
         static T* instance = new T{};  // let it leak
@@ -22,13 +19,9 @@ class Singleton : public virtual NonMovable, public virtual NonCopyable {
 
 template <typename T>
 class UniqueInstance : public virtual NonMovable, public virtual NonCopyable {
-    inline static std::string className = getTypeName<T>();
-
    public:
     explicit UniqueInstance() {
-        log::expect(
-            not s_instanceExists, "Instance of {} already exists", className
-        );
+        log::expect(not s_instanceExists, "Instance already exists");
         s_instanceExists = true;
     }
 

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <boost/core/demangle.hpp>
 #include <string>
 #include <typeindex>
 
@@ -20,10 +19,5 @@ struct RTTI : public virtual NonCopyable, public virtual NonMovable {
         return static_cast<T*>(this);
     }
 };
-
-template <typename T>
-std::string getTypeName() {
-    return boost::core::demangle(typeid(T).name());
-}
 
 }  // namespace hyperion

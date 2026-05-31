@@ -4,8 +4,10 @@
 #include <unordered_map>
 #include <vector>
 
+#include "Concepts.hh"
 #include "Core.hh"
 #include "FileSystem.hh"
+#include "Log.hh"
 
 namespace hyperion {
 
