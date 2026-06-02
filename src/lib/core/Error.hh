@@ -15,6 +15,9 @@ enum class ErrorCode {
     fileNotFound,
     directoryNotFound,
     invalidEnumValue,
+    bufferOutOfScope,
+    invalidMessagePreamble,
+    invalidMessageSize
 };
 
 class Exception : public std::exception {
@@ -63,5 +66,8 @@ class Exception : public std::exception {
     };
 
 DEFINE_ERROR(RuntimeError);
+DEFINE_ERROR(CoreError);
+DEFINE_ERROR(NetError);
+DEFINE_ERROR(ConfigError);
 
 }  // namespace hyperion

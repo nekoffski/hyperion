@@ -6,14 +6,19 @@
 
 namespace hyperion {
 
-class ApiServer : public Thread {
+class Server : public Thread {
    public:
-    explicit ApiServer(const Config& config);
+    explicit Server(const Config& config);
+    ~Server() override;
 
     void cancel() override;
 
    private:
     void run() override;
+
+    void startAcceptor();
+    asio::awaitable<void> acceptConnection();
+    asio::awaitable<void> handleClient(asio::ip::tcp::socket socket);
 
     const Config& m_config;
 

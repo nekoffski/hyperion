@@ -1,5 +1,5 @@
+#include "Daemon.hh"
 #include "PidFile.hh"
-#include "api/ApiServer.hh"
 #include "lib/Platform.hh"
 #include "lib/core/Config.hh"
 #include "lib/core/Core.hh"
@@ -7,27 +7,9 @@
 #include "lib/core/Log.hh"
 #include "lib/core/Scope.hh"
 #include "lib/core/ServiceLocator.hh"
-#include "lib/core/Singleton.hh"
 #include "lib/runtime/Thread.hh"
 
 using namespace hyperion;
-
-class Daemon : public UniqueInstance<Daemon> {
-   public:
-    explicit Daemon() {}
-
-    void start(const Config& config) {
-        m_workers.add<ApiServer>(config);
-
-        m_workers.start();
-        m_workers.join();
-    }
-
-    void stop() { m_workers.cancel(); }
-
-   private:
-    ThreadGroup m_workers;
-};
 
 int main() {
     log::init(log::LoggerOptions{

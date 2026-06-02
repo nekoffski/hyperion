@@ -10,7 +10,7 @@ namespace hyperion {
 
 class Thread : public NonCopyable, public NonMovable {
    public:
-    ~Thread();
+    virtual ~Thread();
 
     void start();
     void join();

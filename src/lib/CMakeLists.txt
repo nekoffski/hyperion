@@ -1,5 +1,6 @@
 add_library(hyperion SHARED
     "Platform.cpp"
+    # -- api
     # -- core
     "core/Config.cpp"
     "core/String.cpp"
@@ -16,6 +17,10 @@ add_library(hyperion SHARED
     "runtime/Signal.cpp"
     "runtime/unix/UnixProcess.cpp"
     "runtime/unix/UnixSignal.cpp"
+    # -- net
+    "net/Session.cpp"
+    # -- messaging
+    "messaging/Payload.cpp"
 )
 
 target_include_directories(hyperion

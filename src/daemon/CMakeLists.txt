@@ -1,8 +1,9 @@
 set (HYPERION_DAEMON_SOURCES
     "main.cpp"
     "PidFile.cpp"
+    "Daemon.cpp"
     # -- api
-    "api/ApiServer.cpp"
+    "api/Server.cpp"
 )
 
 add_executable(hyperiond ${HYPERION_DAEMON_SOURCES})

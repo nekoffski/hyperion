@@ -8,11 +8,11 @@
 namespace hyperion {
 
 struct RTTI : public virtual NonCopyable, public virtual NonMovable {
-    virtual std::type_index getType() const = 0;
+    virtual std::type_index type() const = 0;
 
     template <typename T>
     bool is() const {
-        return getType() == typeid(T);
+        return type() == typeid(T);
     }
     template <typename T>
     T* as() {
