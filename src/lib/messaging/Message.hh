@@ -8,6 +8,7 @@
 namespace hyperion {
 
 template <typename MessageKind>
+    requires std::is_enum_v<MessageKind>
 class Message : public RTTI {
    public:
     virtual ~Message() = default;
@@ -19,14 +20,18 @@ class Message : public RTTI {
     virtual void deserialize(PayloadReader& reader) = 0;
 };
 
-template <typename T, typename MessageKind, MessageKind Kind>
+template <typename T, typename MessageKind, MessageKind MKind>
+    requires std::is_enum_v<MessageKind>
 class MessageImpl : public Message<MessageKind> {
    public:
+    using Kind = MessageKind;
+
     explicit MessageImpl(const std::string& name) : m_name(name) {}
 
-    MessageKind kind() const override { return Kind; }
-    std::type_index type() const override { return typeid(T); }
-    std::string_view name() const override { return m_name; }
+    static MessageKind sKind() { return MKind; }
+    MessageKind kind() const final override { return MKind; }
+    std::type_index type() const final override { return typeid(T); }
+    std::string_view name() const final override { return m_name; }
 
    private:
     std::string m_name;

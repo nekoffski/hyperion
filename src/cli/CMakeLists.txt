@@ -6,6 +6,7 @@ set (HYPERION_SOURCES
     "cmd/DaemonCommand.cpp"
     # -- daemon
     "daemon/DaemonProcess.cpp"
+    "daemon/DaemonClient.cpp"
 )
 
 find_package(CLI11 REQUIRED)

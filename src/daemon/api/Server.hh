@@ -2,11 +2,12 @@
 
 #include "lib/asio/Asio.hh"
 #include "lib/core/Config.hh"
+#include "lib/net/TcpServer.hh"
 #include "lib/runtime/Thread.hh"
 
 namespace hyperion {
 
-class Server : public Thread {
+class Server : public AsioContextOwner, public Thread, public TcpServer {
    public:
     explicit Server(const Config& config);
     ~Server() override;
@@ -15,15 +16,9 @@ class Server : public Thread {
 
    private:
     void run() override;
-
-    void startAcceptor();
-    asio::awaitable<void> acceptConnection();
-    asio::awaitable<void> handleClient(asio::ip::tcp::socket socket);
+    asio::awaitable<void> onClient(TcpSession& session) override;
 
     const Config& m_config;
-
-    asio::io_context m_io;
-    asio::ip::tcp::acceptor m_acceptor;
 };
 
 }  // namespace hyperion

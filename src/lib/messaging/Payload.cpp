@@ -2,7 +2,9 @@
 
 namespace hyperion {
 
-PayloadBufferView PayloadWriter::getBuffer() const { return m_buffer; }
+PayloadBufferView PayloadWriter::getBuffer() { return m_buffer; }
+
+PayloadReader::PayloadReader(PayloadBufferView view) : m_buffer(view) {}
 
 u8* PayloadReader::readImpl(u8 bytes) {
     if (m_buffer.size() < m_index + bytes) {

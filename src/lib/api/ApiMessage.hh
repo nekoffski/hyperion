@@ -6,7 +6,13 @@
 
 namespace hyperion {
 
-enum class ApiMessageKind { none = 0, ping, pong };
+enum class ApiMessageKind {
+    none = 0,
+    healthRequest,
+    healthResponse,
+    error,
+    count
+};
 
 using ApiMessage = Message<ApiMessageKind>;
 

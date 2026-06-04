@@ -14,11 +14,11 @@ namespace hyperion {
 DEFINE_SUB_ERROR(PayloadError, CoreError);
 
 using PayloadBuffer = std::vector<u8>;
-using PayloadBufferView = std::span<const u8>;
+using PayloadBufferView = std::span<u8>;
 
 class PayloadWriter : public NonCopyable, public NonMovable {
    public:
-    PayloadBufferView getBuffer() const;
+    PayloadBufferView getBuffer();
 
     template <typename T>
         requires std::is_arithmetic_v<T>
@@ -60,8 +60,7 @@ class PayloadWriter : public NonCopyable, public NonMovable {
 
 class PayloadReader : public NonCopyable, public NonMovable {
    public:
-    explicit PayloadReader(PayloadBufferView view)
-        : m_index(0u), m_buffer(view.begin(), view.end()) {}
+    explicit PayloadReader(PayloadBufferView view);
 
     template <typename T>
         requires std::is_arithmetic_v<T>
@@ -99,8 +98,8 @@ class PayloadReader : public NonCopyable, public NonMovable {
    private:
     u8* readImpl(u8 bytes);
 
-    u64 m_index;
-    PayloadBuffer m_buffer;
+    u64 m_index{0u};
+    PayloadBufferView m_buffer;
 };
 
 }  // namespace hyperion

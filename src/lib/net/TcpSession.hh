@@ -7,14 +7,14 @@
 
 namespace hyperion {
 
-class Session : public NonCopyable, public NonMovable {
+class TcpSession : public NonCopyable, public NonMovable {
    public:
     static constexpr u16 protocolPreamble = 0xd34f;
     static constexpr u16 headerSize = 4;
     static constexpr u16 maxPayloadSize = 1024;
 
-    explicit Session(asio::ip::tcp::socket socket);
-    ~Session();
+    explicit TcpSession(asio::ip::tcp::socket socket);
+    ~TcpSession();
 
     asio::awaitable<PayloadBuffer> read();
     asio::awaitable<void> write(const PayloadBufferView& buffer);

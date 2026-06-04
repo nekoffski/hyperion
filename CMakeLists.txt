@@ -15,4 +15,3 @@ find_package(asio REQUIRED)
 add_subdirectory(src/lib)
 add_subdirectory(src/daemon)
 add_subdirectory(src/cli)
-

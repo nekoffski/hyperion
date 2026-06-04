@@ -18,7 +18,9 @@ enum class ErrorCode {
     bufferOutOfScope,
     invalidMessagePreamble,
     invalidMessageSize,
+    invalidMessageKind,
     childProcessFailed,
+    deserializerNotFound
 };
 
 class Exception : public std::exception {
@@ -70,5 +72,6 @@ DEFINE_ERROR(RuntimeError);
 DEFINE_ERROR(CoreError);
 DEFINE_ERROR(NetError);
 DEFINE_ERROR(ConfigError);
+DEFINE_ERROR(MessagingError);
 
 }  // namespace hyperion

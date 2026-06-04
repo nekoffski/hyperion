@@ -1,6 +1,8 @@
 add_library(hyperion SHARED
     "Platform.cpp"
     # -- api
+    "api/cmd/Health.cpp"
+    "api/ApiMessageDeserializer.cpp"
     # -- core
     "core/Config.cpp"
     "core/String.cpp"
@@ -18,7 +20,8 @@ add_library(hyperion SHARED
     "runtime/unix/UnixProcess.cpp"
     "runtime/unix/UnixSignal.cpp"
     # -- net
-    "net/Session.cpp"
+    "net/TcpSession.cpp"
+    "net/TcpServer.cpp"
     # -- messaging
     "messaging/Payload.cpp"
 )
