@@ -22,13 +22,9 @@ int main() {
     try {
         Platform::init();
 
-        auto homeDir = getEnv<Str>("HYPERION_HOME");
-        log::expect(
-            homeDir.has_value(), "HYPERION_HOME environment variable is not set"
-        );
-
-        auto config = Config::fromFile(*homeDir);
+        auto config = Config::fromEnv();
         ServiceLocator<Config>::set(&config);
+        log::setLogLevel(config.logging().daemonLevel);
 
         PidFile pidFile{config.daemon().pidfile};
 

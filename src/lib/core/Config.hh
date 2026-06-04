@@ -13,6 +13,8 @@ namespace hyperion {
 
 class Config {
    public:
+    enum class LogConfigFields { skip, log };
+
     struct Version {
         u32 major{0};
         u32 minor{0};
@@ -21,22 +23,30 @@ class Config {
 
     struct Daemon {
         u16 port;
-        Str pidfile;
+        Path pidfile;
+        Path binPath;
     };
 
     struct Logging {
-        log::Level level;
-        Str file;
+        log::Level daemonLevel;
+        log::Level cliLevel;
+        Path daemonFile;
+        Path daemonErrorFile;
     };
 
     const Version& version() const;
     const Daemon& daemon() const;
     const Logging& logging() const;
 
-    static Config fromFile(const Path& path);
+    static Config fromFile(
+        const Path& path, LogConfigFields logConfigFields = LogConfigFields::log
+    );
+    static Config fromEnv(
+        LogConfigFields logConfigFields = LogConfigFields::log
+    );
 
    private:
-    void parseFields(const Path& path);
+    void parseFields(const Path& path, LogConfigFields logConfigFields);
     void parseVersionFile(const Path& path);
 
     Version m_version;

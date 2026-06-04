@@ -17,7 +17,8 @@ enum class ErrorCode {
     invalidEnumValue,
     bufferOutOfScope,
     invalidMessagePreamble,
-    invalidMessageSize
+    invalidMessageSize,
+    childProcessFailed,
 };
 
 class Exception : public std::exception {

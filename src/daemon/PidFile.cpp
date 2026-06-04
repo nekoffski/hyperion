@@ -5,7 +5,7 @@
 namespace hyperion {
 
 PidFile::PidFile(const Path& path)
-    : m_path(path), m_pid(ProcessManager::getPid()) {
+    : m_path(path), m_pid(ProcessManager::currentPid()) {
     log::expect(
         not path.isFile(),
         "Pid file {} already exists, is another instance running?", path.str()

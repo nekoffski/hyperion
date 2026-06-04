@@ -1,7 +1,10 @@
 [daemon]
 port = 7788
 pid_file = "/home/nek0/hyperion/var/hyperiond.pid"
+bin_path = "/home/nek0/hyperion/bin/hyperiond"
 
 [logging]
-level = "debug"
-file = "/home/nek0/hyperion/var/log/hyperiond.log"
+daemon_level = "debug"
+daemon_file = "/home/nek0/hyperion/var/log/hyperiond.log"
+daemon_err = "/home/nek0/hyperion/var/log/hyperiond.err"
+cli_level = "info"

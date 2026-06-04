@@ -63,14 +63,15 @@ void UnixSignalManager::registerHandler(
 
     struct sigaction sa {};
     sa.sa_handler = [](i32 signum) {
-        if (signum >= static_cast<u16>(Signal::count)) {
+        auto sig = static_cast<u16>(fromUnixSignal(signum));
+
+        if (sig >= static_cast<u16>(Signal::count)) {
             log::error(
-                "Received invalid signal with numeric value: {}", signum
+                "Received invalid signal with numeric value: {}/{}", sig, signum
             );
             return;
         }
-        auto internalSignal = static_cast<u16>(fromUnixSignal(signum));
-        if (auto cb = m_handlers[internalSignal]; cb) {
+        if (auto cb = m_handlers[sig]; cb) {
             cb();
         }
     };

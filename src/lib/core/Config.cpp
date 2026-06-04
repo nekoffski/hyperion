@@ -2,6 +2,7 @@
 
 #include <toml++/toml.hpp>
 
+#include "Env.hh"
 #include "FileSystem.hh"
 #include "Log.hh"
 #include "String.hh"
@@ -12,7 +13,11 @@ namespace {
 
 class Reader : public NonCopyable, public NonMovable {
    public:
-    explicit Reader(const toml::table& tbl) : m_tbl(tbl) {}
+    explicit Reader(
+        const toml::table& tbl, Config::LogConfigFields logConfigFields
+    )
+        : m_tbl(tbl),
+          m_logFields(logConfigFields == Config::LogConfigFields::log) {}
 
     template <typename T>
     T read(const Str& stanza, const Str& key) const {
@@ -43,10 +48,12 @@ class Reader : public NonCopyable, public NonMovable {
                 );
                 result.push_back(item.value<Str>().value_or(""));
             }
-            log::debug(
-                "Config: read {}.{} = [ {} ]", stanza, key,
-                fmt::join(result, ",")
-            );
+            if (m_logFields) {
+                log::info(
+                    "Config: read {}.{} = [ {} ]", stanza, key,
+                    fmt::join(result, ",")
+                );
+            }
             return result;
         } else {
             auto v = raw->value<T>();
@@ -55,24 +62,27 @@ class Reader : public NonCopyable, public NonMovable {
                 "Config file must contain a {} field in the [{}] table", key,
                 stanza
             );
-            log::debug("Config: read {}.{} = {}", stanza, key, *v);
+            if (m_logFields) {
+                log::info("Config: read {}.{} = {}", stanza, key, *v);
+            }
             return *v;
         }
     }
 
    private:
     const toml::table& m_tbl;
+    bool m_logFields;
 };
 
 }  // namespace
 
-Config Config::fromFile(const Path& path) {
+Config Config::fromFile(const Path& path, LogConfigFields logConfigFields) {
     Config cfg;
 
     cfg.parseVersionFile(Path::join(path, "etc/version"));
 
     try {
-        cfg.parseFields(Path::join(path, "etc/hyperion.toml"));
+        cfg.parseFields(Path::join(path, "etc/hyperion.toml"), logConfigFields);
     } catch (const toml::parse_error& e) {
         log::panic("Failed to parse config file: {}", e.what());
     } catch (const std::bad_optional_access& e) {
@@ -80,6 +90,14 @@ Config Config::fromFile(const Path& path) {
     }
 
     return cfg;
+}
+
+Config Config::fromEnv(LogConfigFields logConfigFields) {
+    auto homeDir = getEnv<Str>("HYPERION_HOME");
+    log::expect(
+        homeDir.has_value(), "HYPERION_HOME environment variable is not set"
+    );
+    return fromFile(*homeDir, logConfigFields);
 }
 
 using StrVec = std::vector<Str>;
@@ -102,20 +120,24 @@ static log::Level parseLogLevel(const Str& levelStr) {
     return it->second;
 }
 
-void Config::parseFields(const Path& path) {
+void Config::parseFields(const Path& path, LogConfigFields logConfigFields) {
     log::expect(
         path.isFile(), "Config path {} does not exist or is not a file",
         path.str()
     );
 
     auto tbl = toml::parse_file(path.str());
-    Reader r{tbl};
+    Reader r{tbl, logConfigFields};
 
     m_daemon.port = r.read<u16>("daemon", "port");
     m_daemon.pidfile = r.read<Str>("daemon", "pid_file");
+    m_daemon.binPath = r.read<Str>("daemon", "bin_path");
 
-    m_logging.level = parseLogLevel(r.read<Str>("logging", "level"));
-    m_logging.file = r.read<Str>("logging", "file");
+    m_logging.cliLevel = parseLogLevel(r.read<Str>("logging", "cli_level"));
+    m_logging.daemonLevel =
+        parseLogLevel(r.read<Str>("logging", "daemon_level"));
+    m_logging.daemonFile = r.read<Str>("logging", "daemon_file");
+    m_logging.daemonErrorFile = r.read<Str>("logging", "daemon_err");
 }
 
 void Config::parseVersionFile(const Path& path) {

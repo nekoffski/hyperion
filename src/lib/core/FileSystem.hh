@@ -16,6 +16,12 @@ class Path {
         requires std::constructible_from<std::string, Args...>
     Path(Args&&... args) : m_path(std::forward<Args>(args)...) {}
 
+    template <typename... Args>
+    static Path fmt(const std::string& fmt, Args&&... args) {
+        return Path(fmt::format(fmt::runtime(fmt), std::forward<Args>(args)...)
+        );
+    }
+
     const std::string& str() const;
 
     bool isFile() const;
