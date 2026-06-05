@@ -35,8 +35,28 @@ std::optional<std::string> extensionFromPath(
                            ? name.find_first_of('.')
                            : name.find_last_of('.');
 
-    if (begin != path.npos) return name.substr(begin);
+    if (begin != path.npos) {
+        return name.substr(begin);
+    }
     return {};
+}
+
+std::string toBinaryString(std::span<const u8> bytes) {
+    std::string result;
+    result.reserve(bytes.size() * 8);
+    for (const auto byte : bytes) {
+        result += std::bitset<8>(byte).to_string();
+    }
+    return result;
+}
+
+std::string toHexString(std::span<const u8> bytes) {
+    std::string result;
+    result.reserve(bytes.size() * 2);
+    for (const auto byte : bytes) {
+        result += fmt::format("{:02x}", byte);
+    }
+    return result;
 }
 
 }  // namespace hyperion

@@ -2,7 +2,9 @@ add_library(hyperion SHARED
     "Platform.cpp"
     # -- api
     "api/cmd/Health.cpp"
-    "api/ApiMessageDeserializer.cpp"
+    "api/cmd/Error.cpp"
+    "api/MessageDeserializer.cpp"
+    "api/Session.cpp"
     # -- core
     "core/Config.cpp"
     "core/String.cpp"
@@ -22,6 +24,7 @@ add_library(hyperion SHARED
     # -- net
     "net/TcpSession.cpp"
     "net/TcpServer.cpp"
+    "net/Addr.cpp"
     # -- messaging
     "messaging/Payload.cpp"
 )

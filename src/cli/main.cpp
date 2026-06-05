@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     ON_SCOPE_EXIT { log::info("cya"); };
 
     try {
-        HCLI{}.parse(argc, argv);
+        HCLI{config}.parse(argc, argv);
     } catch (const Exception& e) {
         log::error(
             "unhandled exception in main: {} - {}", fmt::underlying(e.code()),

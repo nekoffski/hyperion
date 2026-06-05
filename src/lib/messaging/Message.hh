@@ -7,6 +7,8 @@
 
 namespace hyperion {
 
+using MessageKindUnderlying = u16;
+
 template <typename MessageKind>
     requires std::is_enum_v<MessageKind>
 class Message : public RTTI {
@@ -16,8 +18,14 @@ class Message : public RTTI {
     virtual std::string_view name() const = 0;
     virtual MessageKind kind() const = 0;
 
-    virtual void serialize(PayloadWriter& writer) const = 0;
-    virtual void deserialize(PayloadReader& reader) = 0;
+    virtual void serialize(PayloadWriter& writer) const {
+        writer.write(static_cast<MessageKindUnderlying>(kind()));
+        serializeImpl(writer);
+    }
+    virtual void deserialize(PayloadReader& reader) { deserializeImpl(reader); }
+
+    virtual void serializeImpl(PayloadWriter& writer) const = 0;
+    virtual void deserializeImpl(PayloadReader& reader) = 0;
 };
 
 template <typename T, typename MessageKind, MessageKind MKind>

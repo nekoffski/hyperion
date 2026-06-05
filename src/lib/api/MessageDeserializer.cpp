@@ -1,12 +1,14 @@
-#include "ApiMessageDeserializer.hh"
+#include "MessageDeserializer.hh"
 
+#include "cmd/Error.hh"
 #include "cmd/Health.hh"
 
-namespace hyperion {
+namespace hyperion::api {
 
 ApiMessageDeserializer::ApiMessageDeserializer() {
     registerMessage<HealthRequest>();
     registerMessage<HealthResponse>();
+    registerMessage<ErrorResponse>();
 }
 
-}  // namespace hyperion
+}  // namespace hyperion::api

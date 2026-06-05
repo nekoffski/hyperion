@@ -4,6 +4,8 @@
 
 namespace hyperion::log {
 
+static Level currentLogLevel{Level::trace};
+
 void init(const LoggerOptions& options) {
     auto colorSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
 
@@ -32,7 +34,11 @@ void init(const LoggerOptions& options) {
     spdlog::set_level(spdlog::level::trace);
 }
 
+Level level() { return currentLogLevel; }
+
 void setLogLevel(Level level) {
+    currentLogLevel = level;
+
     switch (level) {
         case Level::trace:
             spdlog::set_level(spdlog::level::trace);

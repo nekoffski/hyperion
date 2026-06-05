@@ -14,13 +14,13 @@
 namespace hyperion::log {
 
 enum class Level {
-    trace,
-    debug,
-    info,
-    warn,
-    error,
-    critical,
     off,
+    critical,
+    error,
+    warn,
+    info,
+    debug,
+    trace,
 };
 
 namespace details {
@@ -56,6 +56,7 @@ struct LoggerOptions {
 
 void init(const LoggerOptions& options = LoggerOptions{});
 void setLogLevel(Level level);
+Level level();
 
 template <typename... Args>
 void debug(details::FormatWithLocation fmt, Args&&... args) {

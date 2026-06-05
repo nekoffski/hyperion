@@ -5,6 +5,7 @@
 #include "Env.hh"
 #include "FileSystem.hh"
 #include "Log.hh"
+#include "ServiceLocator.hh"
 #include "String.hh"
 
 namespace hyperion {

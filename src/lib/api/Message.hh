@@ -4,13 +4,13 @@
 #include "lib/core/Core.hh"
 #include "lib/messaging/Message.hh"
 
-namespace hyperion {
+namespace hyperion::api {
 
 enum class ApiMessageKind {
     none = 0,
     healthRequest,
     healthResponse,
-    error,
+    errorResponse,
     count
 };
 
@@ -19,4 +19,4 @@ using ApiMessage = Message<ApiMessageKind>;
 template <typename T, ApiMessageKind Kind>
 using ApiMessageImpl = MessageImpl<T, ApiMessageKind, Kind>;
 
-}  // namespace hyperion
+}  // namespace hyperion::api

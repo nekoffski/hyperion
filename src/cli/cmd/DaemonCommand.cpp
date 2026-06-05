@@ -6,8 +6,8 @@
 
 namespace hyperion {
 
-DaemonCommand::DaemonCommand(CLI::App& app)
-    : Command(app, "daemon", "Manage the hyperion daemon") {
+DaemonCommand::DaemonCommand(CLI::App& app, DaemonClient& client)
+    : Command(app, "daemon", "Manage the hyperion daemon"), m_client(client) {
     addSubcommand(
         "start", "Start the hyperion daemon",
         [&](CLI::App& cmd) -> asio::awaitable<void> {
@@ -35,8 +35,7 @@ DaemonCommand::DaemonCommand(CLI::App& app)
     addSubcommand(
         "status", "Show the status of the hyperion daemon",
         [&](CLI::App&) -> asio::awaitable<void> {
-            onStatus();
-            co_return;
+            co_return co_await onStatus();
         }
     );
 }
@@ -93,13 +92,20 @@ void DaemonCommand::onRestart() {
     }
 }
 
-void DaemonCommand::onStatus() {
+asio::awaitable<void> DaemonCommand::onStatus() {
     auto& daemon = DaemonProcess::get();
 
     if (const auto& status = daemon.status(); status.running) {
         log::info("Daemon is running with PID {}", daemon.pid());
     } else {
         log::info("Daemon is not running: {}", status.details);
+        co_return;
+    }
+
+    if (auto err = co_await m_client.checkHealth(); err) {
+        log::error("Daemon health check failed: {}", *err);
+    } else {
+        log::info("Daemon health check passed");
     }
 }
 

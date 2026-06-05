@@ -6,8 +6,11 @@
 
 namespace hyperion {
 
-HCLI::HCLI() : m_app{"hyperion CLI"} {
-    m_commands.emplace_back(std::make_unique<DaemonCommand>(m_app));
+HCLI::HCLI(const Config& config)
+    : m_app("hyperion CLI"), m_daemonClient(m_io, config) {
+    m_commands.emplace_back(
+        std::make_unique<DaemonCommand>(m_app, m_daemonClient)
+    );
 }
 
 void HCLI::parse(int argc, char** argv) {
@@ -21,10 +24,8 @@ void HCLI::parse(int argc, char** argv) {
         log::panic("Failed to parse command line arguments: {}", e.what());
     }
 
-    asio::io_context io;
-
     asio::co_spawn(
-        io,
+        m_io,
         [&]() -> asio::awaitable<void> {
             try {
                 for (const auto& cmd : m_commands) {
@@ -49,7 +50,7 @@ void HCLI::parse(int argc, char** argv) {
         asio::detached
     );
 
-    io.run();
+    m_io.run();
 }
 
 }  // namespace hyperion

@@ -1,23 +1,48 @@
 #include "Health.hh"
 
-namespace hyperion {
+#include "lib/core/Random.hh"
+
+namespace hyperion::api {
 
 HealthResponse::HealthResponse()
     : ApiMessageImpl<HealthResponse, ApiMessageKind::healthResponse>(
           "HealthResponse"
       ) {}
 
-void HealthRequest::serialize(PayloadWriter& writer) const {}
+HealthResponse::HealthResponse(const std::string& uuid)
+    : ApiMessageImpl<HealthResponse, ApiMessageKind::healthResponse>(
+          "HealthResponse"
+      ),
+      m_uuid(uuid) {}
 
-void HealthRequest::deserialize(PayloadReader& reader) {}
+const std::string& HealthResponse::uuid() const { return m_uuid; }
+
+std::string& HealthResponse::uuid() { return m_uuid; }
+
+void HealthRequest::serializeImpl(PayloadWriter& writer) const {
+    writer.write(m_uuid);
+}
+
+void HealthRequest::deserializeImpl(PayloadReader& reader) {
+    reader.read(m_uuid);
+}
+
+const std::string& HealthRequest::uuid() const { return m_uuid; }
+
+std::string& HealthRequest::uuid() { return m_uuid; }
 
 HealthRequest::HealthRequest()
     : ApiMessageImpl<HealthRequest, ApiMessageKind::healthRequest>(
           "HealthRequest"
-      ) {}
+      ),
+      m_uuid(RandomEngine::get().uuid()) {}
 
-void HealthResponse::serialize(PayloadWriter& writer) const {}
+void HealthResponse::serializeImpl(PayloadWriter& writer) const {
+    writer.write(m_uuid);
+}
 
-void HealthResponse::deserialize(PayloadReader& reader) {}
+void HealthResponse::deserializeImpl(PayloadReader& reader) {
+    reader.read(m_uuid);
+}
 
-}  // namespace hyperion
+}  // namespace hyperion::api

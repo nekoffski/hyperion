@@ -5,6 +5,6 @@ bin_path = "/home/nek0/hyperion/bin/hyperiond"
 
 [logging]
 daemon_level = "debug"
+cli_level = "debug"
 daemon_file = "/home/nek0/hyperion/var/log/hyperiond.log"
 daemon_err = "/home/nek0/hyperion/var/log/hyperiond.err"
-cli_level = "info"

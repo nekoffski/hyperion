@@ -1,7 +1,10 @@
 #pragma once
 
 #include <algorithm>
+#include <bitset>
+#include <concepts>
 #include <optional>
+#include <span>
 #include <string>
 #include <vector>
 
@@ -37,5 +40,19 @@ std::optional<std::string> extensionFromPath(
 std::vector<std::string> split(
     const std::string& input, const std::string& separator
 );
+
+template <std::unsigned_integral T>
+std::string toBinaryString(T value) {
+    return std::bitset<sizeof(T) * 8>(value).to_string();
+}
+
+std::string toBinaryString(std::span<const u8> bytes);
+
+template <std::unsigned_integral T>
+std::string toHexString(T value) {
+    return fmt::format("{:0{}x}", value, sizeof(T) * 2);
+}
+
+std::string toHexString(std::span<const u8> bytes);
 
 }  // namespace hyperion

@@ -23,9 +23,9 @@ class MessageDeserializer : public NonCopyable, public NonMovable {
 
    public:
     MessagePtr deserialize(PayloadReader& reader) const {
-        const auto rawKind = reader.read<u16>();
+        const auto rawKind = reader.read<MessageKindUnderlying>();
 
-        if (rawKind >= static_cast<u16>(MessageKind::count)) {
+        if (rawKind >= static_cast<MessageKindUnderlying>(MessageKind::count)) {
             throw MessagingError{
                 ErrorCode::invalidMessageKind, "Invalid message kind: {}",
                 rawKind
@@ -51,7 +51,7 @@ class MessageDeserializer : public NonCopyable, public NonMovable {
         auto kind = T::sKind();
         log::expect(
             not m_deserializers.contains(kind),
-            "Message kind already registered: {}", static_cast<int>(kind)
+            "Message kind already registered: {}", fmt::underlying(kind)
         );
         m_deserializers[kind] = [](PayloadReader& reader) -> MessagePtr {
             auto message = std::make_unique<T>();

@@ -1,6 +1,7 @@
 #include "Server.hh"
 
-#include "lib/api/ApiMessageDeserializer.hh"
+#include "lib/api/MessageDeserializer.hh"
+#include "lib/api/Session.hh"
 #include "lib/core/Log.hh"
 #include "lib/core/Time.hh"
 #include "lib/net/TcpSession.hh"
@@ -27,22 +28,38 @@ void Server::run() {
     io().run();
 }
 
-asio::awaitable<void> Server::onClient(TcpSession& session) {
-    auto& deserializer = ApiMessageDeserializer::get();
+asio::awaitable<void> Server::onClient(TcpSession& s) {
+    auto& deserializer = api::ApiMessageDeserializer::get();
+    api::ApiSession session{s};
 
     for (;;) {
         try {
-            auto buffer = co_await session.read();
-            PayloadReader reader{buffer};
+            auto message = co_await session.read(deserializer);
+            log::expect(
+                message != nullptr, "Received null message from client: {}",
+                session.ident()
+            );
 
-            auto message = deserializer.deserialize(reader);
+            auto response = co_await m_apiController.handleMessage(*message);
+            log::expect(
+                response != nullptr,
+                "API controller returned null response for client: {}",
+                session.ident()
+            );
+
+            co_await session.write(*response);
 
         } catch (const NetError& e) {
             log::error(
-                "{} - Received malformed message, dropping session",
-                session.ident()
+                "{} - Received malformed message, dropping session - {}",
+                session.ident(), e.message()
             );
             break;
+        } catch (const MessagingError& e) {
+            log::error(
+                "{} - Serialization error: {}, dropping request",
+                session.ident(), e.message()
+            );
         }
     }
 }
