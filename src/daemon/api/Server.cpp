@@ -2,6 +2,7 @@
 
 #include "lib/api/MessageDeserializer.hh"
 #include "lib/api/Session.hh"
+#include "lib/api/cmd/Error.hh"
 #include "lib/core/Log.hh"
 #include "lib/core/Time.hh"
 #include "lib/net/TcpSession.hh"
@@ -35,20 +36,25 @@ asio::awaitable<void> Server::onClient(TcpSession& s) {
     for (;;) {
         try {
             auto message = co_await session.read(deserializer);
-            log::expect(
-                message != nullptr, "Received null message from client: {}",
-                session.ident()
-            );
 
-            auto response = co_await m_apiController.handleMessage(*message);
-            log::expect(
-                response != nullptr,
-                "API controller returned null response for client: {}",
-                session.ident()
-            );
+            if (not message) {
+                log::error("{} - could deserialize message", session.ident());
 
-            co_await session.write(*response);
+                api::ErrorResponse response{
+                    "Serialization error, message not registered"
+                };
+                co_await session.write(response);
+            } else {
+                auto response =
+                    co_await m_apiController.handleMessageWithError(*message);
+                log::expect(
+                    response != nullptr,
+                    "API controller returned null response for client: {}",
+                    session.ident()
+                );
 
+                co_await session.write(*response);
+            }
         } catch (const NetError& e) {
             log::error(
                 "{} - Received malformed message, dropping session - {}",

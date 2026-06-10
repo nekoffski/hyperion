@@ -96,9 +96,11 @@ def build_context(args: argparse.Namespace) -> InstallContext:
 def ensure_layout_dirs(home: Path) -> None:
     required_dirs = [
         home / "etc",
-        home / "etc" / "jobs",
-        home / "var" / "log",
         home / "bin",
+        home / "var" / "log",
+        home / "var" / "run",
+        home / "var" / "lib",
+        home / "var" / "lib" / "workspaces",
     ]
 
     for directory in required_dirs:

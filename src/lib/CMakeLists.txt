@@ -1,14 +1,17 @@
 add_library(hyperion SHARED
     "Platform.cpp"
     # -- api
+    "api/cmd/Ack.cpp"
     "api/cmd/Health.cpp"
     "api/cmd/Error.cpp"
+    "api/cmd/Workspace.cpp"
     "api/MessageDeserializer.cpp"
     "api/Session.cpp"
     # -- core
     "core/Config.cpp"
     "core/String.cpp"
     "core/Core.cpp"
+    "core/Json.cpp"
     "core/Log.cpp"
     "core/String.cpp"
     "core/Error.cpp"
@@ -41,7 +44,10 @@ target_link_libraries(hyperion
         tomlplusplus::tomlplusplus
         stduuid::stduuid
         asio::asio
+        nlohmann_json::nlohmann_json
 )
+
+target_precompile_headers(hyperion PUBLIC "core/Json.hh")
 
 set_target_properties(hyperion PROPERTIES POSITION_INDEPENDENT_CODE ON)
 

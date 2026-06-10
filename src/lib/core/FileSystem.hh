@@ -26,6 +26,7 @@ class Path {
 
     bool isFile() const;
     bool isDirectory() const;
+    bool exists() const;
 
     Path parent() const;
 
@@ -56,6 +57,22 @@ class File {
     Path m_path;
 };
 
-class Directory {};
+class Directory {
+   public:
+    explicit Directory(const Path& path);
+
+    const Path& path() const;
+
+    std::vector<Path> listFiles() const;
+    std::vector<Path> listDirectories() const;
+
+    void create();
+    void createSubdirectory(const Path& name);
+    void touch(const Path& name);
+    void remove();
+
+   private:
+    Path m_path;
+};
 
 }  // namespace hyperion

@@ -12,15 +12,20 @@ enum class ErrorCode {
     invalidArgument,
     badConfig,
     outOfRange,
+    ioError,
+    fileSystemError,
     fileNotFound,
     directoryNotFound,
     invalidEnumValue,
+    duplicate,
     bufferOutOfScope,
     invalidMessagePreamble,
     invalidMessageSize,
     invalidMessageKind,
     childProcessFailed,
-    deserializerNotFound
+    deserializerNotFound,
+    workspaceError,
+    invalidConfiguration,
 };
 
 class Exception : public std::exception {
@@ -73,5 +78,6 @@ DEFINE_ERROR(CoreError);
 DEFINE_ERROR(NetError);
 DEFINE_ERROR(ConfigError);
 DEFINE_ERROR(MessagingError);
+DEFINE_ERROR(WorkspaceError);
 
 }  // namespace hyperion

@@ -1,6 +1,6 @@
 [daemon]
 port = 7788
-pid_file = "/home/nek0/hyperion/var/hyperiond.pid"
+pid_file = "/home/nek0/hyperion/var/run/hyperiond.pid"
 bin_path = "/home/nek0/hyperion/bin/hyperiond"
 
 [logging]

@@ -102,8 +102,8 @@ asio::awaitable<void> DaemonCommand::onStatus() {
         co_return;
     }
 
-    if (auto err = co_await m_client.checkHealth(); err) {
-        log::error("Daemon health check failed: {}", *err);
+    if (co_await m_client.healthy()) {
+        log::error("Daemon health check failed, invalid response");
     } else {
         log::info("Daemon health check passed");
     }

@@ -38,10 +38,7 @@ class MessageDeserializer : public NonCopyable, public NonMovable {
             return it->second(reader);
         }
 
-        throw MessagingError{
-            ErrorCode::deserializerNotFound,
-            "No deserializer registered for message kind: {}", rawKind
-        };
+        return nullptr;
     }
 
    protected:

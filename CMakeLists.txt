@@ -11,6 +11,7 @@ find_package(spdlog REQUIRED)
 find_package(tomlplusplus CONFIG REQUIRED)
 find_package(stduuid REQUIRED)
 find_package(asio REQUIRED)
+find_package(nlohmann_json REQUIRED)
 
 add_subdirectory(src/lib)
 add_subdirectory(src/daemon)

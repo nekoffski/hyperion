@@ -5,6 +5,7 @@ tomlplusplus/3.4.0
 stduuid/1.2.3
 cli11/2.4.2
 asio/1.30.2
+nlohmann_json/3.11.3
 
 [generators]
 CMakeDeps

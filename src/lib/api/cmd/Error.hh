@@ -20,10 +20,10 @@ class ErrorResponse
     ErrorCode code() const;
     ErrorCode& code();
 
-    void serializeImpl(PayloadWriter& writer) const override;
-    void deserializeImpl(PayloadReader& reader) override;
-
    private:
+    void serializeImpl(PayloadWriter& writer) const final override;
+    void deserializeImpl(PayloadReader& reader) final override;
+
     std::string m_details;
     ErrorCode m_code{ErrorCode::none};
 };

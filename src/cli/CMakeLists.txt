@@ -4,6 +4,7 @@ set (HYPERION_SOURCES
     "Command.cpp"
     # -- cmd
     "cmd/DaemonCommand.cpp"
+    "cmd/WorkspaceCommand.cpp"
     # -- daemon
     "daemon/DaemonProcess.cpp"
     "daemon/DaemonClient.cpp"

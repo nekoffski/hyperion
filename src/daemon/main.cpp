@@ -33,7 +33,7 @@ int main() {
             config.version().minor, config.version().patch
         );
 
-        Daemon daemon;
+        Daemon daemon{config};
         ServiceLocator<Daemon>::set(&daemon);
 
         SignalManager::registerHandler(Signal::interrupt, []() {
@@ -46,7 +46,7 @@ int main() {
             ServiceLocator<Daemon>::get().stop();
         });
 
-        daemon.start(config);
+        daemon.start();
 
     } catch (const Exception& e) {
         log::error(

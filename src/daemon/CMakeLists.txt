@@ -4,8 +4,11 @@ set (HYPERION_DAEMON_SOURCES
     "Daemon.cpp"
     # -- api
     "api/Server.cpp"
+    "api/Controller.cpp"
     # -- orchestrator
-    "orchestrator/ApiController.cpp"
+    "orchestrator/WorkspaceManager.cpp"
+    # -- workspace
+    "workspace/DiskWorkspaceRepo.cpp"
 )
 
 add_executable(hyperiond ${HYPERION_DAEMON_SOURCES})

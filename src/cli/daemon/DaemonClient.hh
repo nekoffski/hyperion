@@ -7,6 +7,7 @@
 #include "lib/core/Config.hh"
 #include "lib/core/Core.hh"
 #include "lib/core/Singleton.hh"
+#include "lib/orchestrator/Workspace.hh"
 
 namespace hyperion {
 
@@ -14,7 +15,10 @@ class DaemonClient : public UniqueInstance<DaemonClient> {
    public:
     explicit DaemonClient(asio::io_context& io, const Config& config);
 
-    asio::awaitable<Opt<Str>> checkHealth();
+    asio::awaitable<bool> healthy();
+    asio::awaitable<void> createWorkspace(const WorkspaceConfig& config);
+    asio::awaitable<void> deleteWorkspace(const Str& name);
+    asio::awaitable<std::vector<WorkspaceConfig>> listWorkspaces();
 
    private:
     asio::awaitable<std::unique_ptr<api::ApiMessage>> sendMessage(

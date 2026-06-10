@@ -1,6 +1,7 @@
 #include "HCLI.hh"
 
 #include "cmd/DaemonCommand.hh"
+#include "cmd/WorkspaceCommand.hh"
 #include "lib/asio/Asio.hh"
 #include "lib/core/Log.hh"
 
@@ -10,6 +11,9 @@ HCLI::HCLI(const Config& config)
     : m_app("hyperion CLI"), m_daemonClient(m_io, config) {
     m_commands.emplace_back(
         std::make_unique<DaemonCommand>(m_app, m_daemonClient)
+    );
+    m_commands.emplace_back(
+        std::make_unique<WorkspaceCommand>(m_app, m_daemonClient)
     );
 }
 

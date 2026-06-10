@@ -79,6 +79,7 @@ class Reader : public NonCopyable, public NonMovable {
 
 Config Config::fromFile(const Path& path, LogConfigFields logConfigFields) {
     Config cfg;
+    cfg.m_rootPath = path;
 
     cfg.parseVersionFile(Path::join(path, "etc/version"));
 
@@ -176,6 +177,7 @@ void Config::parseVersionFile(const Path& path) {
 
 // -- getters
 
+const Path& Config::rootPath() const { return m_rootPath; }
 const Config::Version& Config::version() const { return m_version; }
 const Config::Daemon& Config::daemon() const { return m_daemon; }
 const Config::Logging& Config::logging() const { return m_logging; }

@@ -9,13 +9,13 @@ class HealthRequest
    public:
     explicit HealthRequest();
 
-    void serializeImpl(PayloadWriter& writer) const override;
-    void deserializeImpl(PayloadReader& reader) override;
-
     const std::string& uuid() const;
     std::string& uuid();
 
    private:
+    void serializeImpl(PayloadWriter& writer) const final override;
+    void deserializeImpl(PayloadReader& reader) final override;
+
     std::string m_uuid;
 };
 
@@ -28,10 +28,10 @@ class HealthResponse
     const std::string& uuid() const;
     std::string& uuid();
 
-    void serializeImpl(PayloadWriter& writer) const override;
-    void deserializeImpl(PayloadReader& reader) override;
-
    private:
+    void serializeImpl(PayloadWriter& writer) const final override;
+    void deserializeImpl(PayloadReader& reader) final override;
+
     std::string m_uuid;
 };
 

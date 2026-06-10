@@ -14,9 +14,15 @@ struct RTTI : public virtual NonCopyable, public virtual NonMovable {
     bool is() const {
         return type() == typeid(T);
     }
+
     template <typename T>
-    T* as() {
-        return static_cast<T*>(this);
+    T& as() {
+        return *static_cast<T*>(this);
+    }
+
+    template <typename T>
+    const T& as() const {
+        return *static_cast<const T*>(this);
     }
 };
 

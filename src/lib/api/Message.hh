@@ -8,9 +8,14 @@ namespace hyperion::api {
 
 enum class ApiMessageKind {
     none = 0,
+    ack,
     healthRequest,
     healthResponse,
     errorResponse,
+    workspaceListRequest,
+    workspaceListResponse,
+    workspaceCreateRequest,
+    workspaceDeleteRequest,
     count
 };
 

@@ -34,6 +34,8 @@ class Config {
         Path daemonErrorFile;
     };
 
+    const Path& rootPath() const;
+
     const Version& version() const;
     const Daemon& daemon() const;
     const Logging& logging() const;
@@ -52,6 +54,7 @@ class Config {
     Version m_version;
     Daemon m_daemon;
     Logging m_logging;
+    Path m_rootPath;
 };
 
 }  // namespace hyperion

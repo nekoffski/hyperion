@@ -24,6 +24,7 @@ class Message : public RTTI {
     }
     virtual void deserialize(PayloadReader& reader) { deserializeImpl(reader); }
 
+   private:
     virtual void serializeImpl(PayloadWriter& writer) const = 0;
     virtual void deserializeImpl(PayloadReader& reader) = 0;
 };
