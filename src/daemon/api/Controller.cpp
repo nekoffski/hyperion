@@ -4,7 +4,7 @@
 #include "lib/api/cmd/Error.hh"
 #include "lib/api/cmd/Health.hh"
 #include "lib/core/ServiceLocator.hh"
-#include "orchestrator/WorkspaceManager.hh"
+#include "workspace/WorkspaceManager.hh"
 
 namespace hyperion {
 

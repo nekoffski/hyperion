@@ -3,7 +3,7 @@
 #include "lib/core/Config.hh"
 #include "lib/core/Core.hh"
 #include "lib/core/FileSystem.hh"
-#include "orchestrator/WorkspaceRepo.hh"
+#include "workspace/WorkspaceRepo.hh"
 
 namespace hyperion {
 

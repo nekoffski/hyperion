@@ -1,10 +1,10 @@
 #pragma once
 
+#include "adapters/DiskWorkspaceRepo.hh"
 #include "lib/core/Config.hh"
 #include "lib/core/Singleton.hh"
 #include "lib/runtime/Thread.hh"
-#include "orchestrator/WorkspaceManager.hh"
-#include "workspace/DiskWorkspaceRepo.hh"
+#include "workspace/WorkspaceManager.hh"
 
 namespace hyperion {
 

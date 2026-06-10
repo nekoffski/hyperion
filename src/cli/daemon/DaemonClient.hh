@@ -2,12 +2,12 @@
 
 #include "lib/api/Session.hh"
 #include "lib/api/cmd/Health.hh"
-#include "lib/asio/Asio.hh"
 #include "lib/core/Concepts.hh"
 #include "lib/core/Config.hh"
 #include "lib/core/Core.hh"
 #include "lib/core/Singleton.hh"
-#include "lib/orchestrator/Workspace.hh"
+#include "lib/models/Workspace.hh"
+#include "lib/net/Asio.hh"
 
 namespace hyperion {
 

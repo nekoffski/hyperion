@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Addr.hh"
-#include "lib/asio/Asio.hh"
 #include "lib/core/Concepts.hh"
 #include "lib/core/Core.hh"
 #include "lib/messaging/Payload.hh"
+#include "lib/net/Asio.hh"
 
 namespace hyperion {
 

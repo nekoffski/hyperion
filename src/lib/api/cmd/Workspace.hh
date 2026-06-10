@@ -1,7 +1,7 @@
 #pragma once
 
 #include "lib/api/Message.hh"
-#include "lib/orchestrator/Workspace.hh"
+#include "lib/models/Workspace.hh"
 
 namespace hyperion::api {
 

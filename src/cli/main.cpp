@@ -1,12 +1,12 @@
 
 #include "HCLI.hh"
 #include "lib/Platform.hh"
-#include "lib/asio/Asio.hh"
 #include "lib/core/Config.hh"
 #include "lib/core/Error.hh"
 #include "lib/core/Log.hh"
 #include "lib/core/Scope.hh"
 #include "lib/core/ServiceLocator.hh"
+#include "lib/net/Asio.hh"
 
 using namespace hyperion;
 

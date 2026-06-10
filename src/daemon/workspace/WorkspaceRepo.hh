@@ -4,7 +4,7 @@
 
 #include "lib/core/Concepts.hh"
 #include "lib/core/Core.hh"
-#include "lib/orchestrator/Workspace.hh"
+#include "lib/models/Workspace.hh"
 
 namespace hyperion {
 
