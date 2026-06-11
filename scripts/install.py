@@ -165,8 +165,11 @@ def write_default_config(ctx: InstallContext) -> None:
             f"[install] ERROR: default config not found: {source_config}", file=sys.stderr)
         raise SystemExit(1)
 
-    shutil.copy2(source_config, config_file)
-    print(f"[install] Copied default config: {config_file}")
+    home = Path.home()
+    content = source_config.read_text(encoding="utf-8").replace("~", str(home))
+    config_file.write_text(content, encoding="utf-8")
+    print(
+        f"[install] Copied default config: {config_file} (~ expanded to {home})")
 
 
 def run_install(ctx: InstallContext) -> int:

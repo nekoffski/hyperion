@@ -6,12 +6,27 @@
 #include "lib/core/Concepts.hh"
 #include "lib/core/Core.hh"
 #include "lib/core/Error.hh"
+#include "lib/core/FlatMap.hh"
 #include "lib/core/Log.hh"
 #include "lib/core/Scope.hh"
 
 namespace hyperion {
 
 DEFINE_SUB_ERROR(PayloadError, CoreError);
+
+namespace detail {
+
+template <typename T>
+struct isVector : std::false_type {};
+template <typename T>
+struct isVector<std::vector<T>> : std::true_type {};
+
+template <typename T>
+struct isFlatMap : std::false_type {};
+template <typename K, typename V>
+struct isFlatMap<FlatMap<K, V>> : std::true_type {};
+
+}  // namespace detail
 
 using PayloadBuffer = std::vector<u8>;
 using PayloadBufferView = std::span<u8>;
@@ -44,6 +59,33 @@ class PayloadWriter : public NonCopyable, public NonMovable {
         write(&size, 1);
         write(v.data(), size);
 
+        return *this;
+    }
+
+    template <typename T>
+    PayloadWriter& write(const std::vector<T>& v) {
+        log::expect(
+            v.size() <= std::numeric_limits<u32>::max(),
+            "Vector too long to serialize"
+        );
+        write(static_cast<u32>(v.size()));
+        for (const auto& item : v) {
+            write(item);
+        }
+        return *this;
+    }
+
+    template <typename K, typename V>
+    PayloadWriter& write(const FlatMap<K, V>& m) {
+        log::expect(
+            m.size() <= std::numeric_limits<u32>::max(),
+            "FlatMap too large to serialize"
+        );
+        write(static_cast<u32>(m.size()));
+        for (const auto& [k, v] : m) {
+            write(k);
+            write(v);
+        }
         return *this;
     }
 
@@ -87,9 +129,38 @@ class PayloadReader : public NonCopyable, public NonMovable {
     }
 
     template <typename T>
-        requires requires(PayloadReader& br) {
-            { br.read<T>() } -> std::same_as<T>;
+        requires detail::isVector<T>::value
+    T read() {
+        const auto count = read<u32>();
+        T result;
+        result.reserve(count);
+        for (u32 i = 0; i < count; ++i) {
+            result.push_back(read<typename T::value_type>());
         }
+        return result;
+    }
+
+    template <typename T>
+        requires detail::isFlatMap<T>::value
+    T read() {
+        using KeyType = typename T::value_type::first_type;
+        using ValueType = typename T::value_type::second_type;
+        const auto count = read<u32>();
+        T result;
+        result.reserve(count);
+        for (u32 i = 0; i < count; ++i) {
+            result.insert(read<KeyType>(), read<ValueType>());
+        }
+        return result;
+    }
+
+    template <typename T>
+        requires(
+            std::is_arithmetic_v<T> || std::is_same_v<T, std::string> ||
+            (std::is_default_constructible_v<T> &&
+             requires(PayloadReader& bw, T& t) { deserialize(bw, t); }) ||
+            detail::isVector<T>::value || detail::isFlatMap<T>::value
+        )
     PayloadReader& read(T& out) {
         out = read<T>();
         return *this;

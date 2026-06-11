@@ -33,13 +33,15 @@ class Exception : public std::exception {
     template <typename... Args>
     explicit Exception(ErrorCode code, const std::string& fmt, Args&&... args)
         : m_code(code),
-          m_message(fmt::format(fmt::runtime(fmt), std::forward<Args>(args)...)
+          m_message(
+              fmt::format(fmt::runtime(fmt), std::forward<Args>(args)...)
           ) {}
 
     template <typename... Args>
     explicit Exception(const std::string& fmt, Args&&... args)
         : m_code(ErrorCode::none),
-          m_message(fmt::format(fmt::runtime(fmt), std::forward<Args>(args)...)
+          m_message(
+              fmt::format(fmt::runtime(fmt), std::forward<Args>(args)...)
           ) {}
 
     const std::string& message() const;
