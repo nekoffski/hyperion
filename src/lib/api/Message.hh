@@ -16,6 +16,12 @@ enum class ApiMessageKind {
     workspaceListResponse,
     workspaceCreateRequest,
     workspaceDeleteRequest,
+    jobCreateRequest,
+    jobStopRequest,
+    jobListRequest,
+    jobListResponse,
+    jobStatusRequest,
+    jobStatusResponse,
     count
 };
 
