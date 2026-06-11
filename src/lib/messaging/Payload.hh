@@ -149,7 +149,9 @@ class PayloadReader : public NonCopyable, public NonMovable {
         T result;
         result.reserve(count);
         for (u32 i = 0; i < count; ++i) {
-            result.insert(read<KeyType>(), read<ValueType>());
+            auto key = read<KeyType>();
+            auto val = read<ValueType>();
+            result.insert(std::move(key), std::move(val));
         }
         return result;
     }
