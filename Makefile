@@ -1,4 +1,4 @@
-.PHONY: all build build-release build-debug clean fmt
+.PHONY: all build build-release build-debug test clean fmt
 
 all: build
 
@@ -16,6 +16,9 @@ build-debug:
 
 fmt:
 	find src -name '*.cpp' -o -name '*.hh' -o -name '*.h' | xargs clang-format -i
+
+test: build-debug
+	ctest --preset conan-debug --output-on-failure
 
 clean:
 	rm -rf build CMakeUserPresets.json

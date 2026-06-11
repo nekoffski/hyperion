@@ -16,3 +16,6 @@ find_package(nlohmann_json REQUIRED)
 add_subdirectory(src/lib)
 add_subdirectory(src/daemon)
 add_subdirectory(src/cli)
+
+enable_testing()
+add_subdirectory(tests)

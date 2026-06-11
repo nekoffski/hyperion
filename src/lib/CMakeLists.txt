@@ -4,6 +4,7 @@ add_library(hyperion SHARED
     "api/cmd/Ack.cpp"
     "api/cmd/Health.cpp"
     "api/cmd/Error.cpp"
+    "api/cmd/Job.cpp"
     "api/cmd/Workspace.cpp"
     "api/MessageDeserializer.cpp"
     "api/Session.cpp"

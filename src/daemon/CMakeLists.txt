@@ -1,5 +1,4 @@
-set (HYPERION_DAEMON_SOURCES
-    "main.cpp"
+add_library(hyperiond_core STATIC
     "PidFile.cpp"
     "Daemon.cpp"
     # -- api
@@ -11,6 +10,8 @@ set (HYPERION_DAEMON_SOURCES
     "adapters/DiskWorkspaceRepo.cpp"
 )
 
-add_executable(hyperiond ${HYPERION_DAEMON_SOURCES})
-target_link_libraries(hyperiond PRIVATE hyperion)
-target_include_directories(hyperiond PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(hyperiond_core PUBLIC hyperion)
+target_include_directories(hyperiond_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(hyperiond "main.cpp")
+target_link_libraries(hyperiond PRIVATE hyperiond_core)
