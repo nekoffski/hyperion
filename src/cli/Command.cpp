@@ -1,6 +1,6 @@
 #include "Command.hh"
 
-#include "lib/core/Log.hh"
+#include "internal/core/Log.hh"
 
 namespace hyperion {
 

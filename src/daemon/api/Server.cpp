@@ -1,11 +1,11 @@
 #include "Server.hh"
 
-#include "lib/api/MessageDeserializer.hh"
-#include "lib/api/Session.hh"
-#include "lib/api/cmd/Error.hh"
-#include "lib/core/Log.hh"
-#include "lib/core/Time.hh"
-#include "lib/net/TcpSession.hh"
+#include "internal/api/MessageDeserializer.hh"
+#include "internal/api/Session.hh"
+#include "internal/api/cmd/Error.hh"
+#include "internal/core/Log.hh"
+#include "internal/core/Time.hh"
+#include "internal/net/TcpSession.hh"
 
 namespace hyperion {
 

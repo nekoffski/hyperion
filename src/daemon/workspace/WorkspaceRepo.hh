@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#include "lib/core/Concepts.hh"
-#include "lib/core/Core.hh"
-#include "lib/models/Workspace.hh"
+#include "internal/core/Concepts.hh"
+#include "internal/core/Core.hh"
+#include "internal/models/Workspace.hh"
 
 namespace hyperion {
 

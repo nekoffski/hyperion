@@ -1,10 +1,10 @@
 #include "DaemonProcess.hh"
 
-#include "lib/core/FileSystem.hh"
-#include "lib/core/Log.hh"
-#include "lib/core/ServiceLocator.hh"
-#include "lib/core/Time.hh"
-#include "lib/runtime/Signal.hh"
+#include "internal/core/FileSystem.hh"
+#include "internal/core/Log.hh"
+#include "internal/core/ServiceLocator.hh"
+#include "internal/core/Time.hh"
+#include "internal/runtime/Signal.hh"
 
 namespace hyperion {
 

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "lib/api/Session.hh"
-#include "lib/api/cmd/Health.hh"
-#include "lib/core/Concepts.hh"
-#include "lib/core/Config.hh"
-#include "lib/core/Core.hh"
-#include "lib/core/Singleton.hh"
-#include "lib/models/Workspace.hh"
-#include "lib/net/Asio.hh"
+#include "internal/api/Session.hh"
+#include "internal/api/cmd/Health.hh"
+#include "internal/core/Concepts.hh"
+#include "internal/core/Config.hh"
+#include "internal/core/Core.hh"
+#include "internal/core/Singleton.hh"
+#include "internal/models/Workspace.hh"
+#include "internal/net/Asio.hh"
 
 namespace hyperion {
 

@@ -1,14 +1,14 @@
 #include "WorkspaceManager.hh"
 
-#include "lib/core/FileSystem.hh"
-#include "lib/core/Scope.hh"
+#include "internal/core/FileSystem.hh"
+#include "internal/core/Scope.hh"
 
 namespace hyperion {
 
 namespace {
 
 Path workspacesPath(const Config& config) {
-    return Path::join(config.rootPath(), "var/lib/workspaces");
+    return Path::join(config.rootPath(), "var/internal/workspaces");
 }
 
 }  // namespace

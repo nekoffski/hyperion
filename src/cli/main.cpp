@@ -1,20 +1,22 @@
 
 #include "HCLI.hh"
-#include "lib/Platform.hh"
-#include "lib/core/Config.hh"
-#include "lib/core/Error.hh"
-#include "lib/core/Log.hh"
-#include "lib/core/Scope.hh"
-#include "lib/core/ServiceLocator.hh"
-#include "lib/net/Asio.hh"
+#include "internal/Platform.hh"
+#include "internal/core/Config.hh"
+#include "internal/core/Error.hh"
+#include "internal/core/Log.hh"
+#include "internal/core/Scope.hh"
+#include "internal/core/ServiceLocator.hh"
+#include "internal/net/Asio.hh"
 
 using namespace hyperion;
 
 int main(int argc, char** argv) {
-    log::init(log::LoggerOptions{
-        .enableColors = true,
-        .formatPattern = "hcli> %v",
-    });
+    log::init(
+        log::LoggerOptions{
+            .enableColors = true,
+            .formatPattern = "hcli> %v",
+        }
+    );
 
     auto config = Config::fromEnv(Config::LogConfigFields::skip);
     ServiceLocator<Config>::set(&config);

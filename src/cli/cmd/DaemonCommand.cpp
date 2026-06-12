@@ -1,8 +1,8 @@
 #include "DaemonCommand.hh"
 
 #include "daemon/DaemonProcess.hh"
-#include "lib/core/Log.hh"
-#include "lib/runtime/Process.hh"
+#include "internal/core/Log.hh"
+#include "internal/runtime/Process.hh"
 
 namespace hyperion {
 

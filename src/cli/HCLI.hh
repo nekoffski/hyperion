@@ -6,8 +6,8 @@
 
 #include "Command.hh"
 #include "daemon/DaemonClient.hh"
-#include "lib/core/Concepts.hh"
-#include "lib/core/Core.hh"
+#include "internal/core/Concepts.hh"
+#include "internal/core/Core.hh"
 
 namespace hyperion {
 

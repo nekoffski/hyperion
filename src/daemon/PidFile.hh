@@ -1,8 +1,8 @@
 #pragma once
 
-#include "lib/core/Concepts.hh"
-#include "lib/core/FileSystem.hh"
-#include "lib/runtime/Process.hh"
+#include "internal/core/Concepts.hh"
+#include "internal/core/FileSystem.hh"
+#include "internal/runtime/Process.hh"
 
 namespace hyperion {
 

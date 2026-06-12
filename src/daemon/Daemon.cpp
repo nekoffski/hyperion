@@ -1,7 +1,7 @@
 #include "Daemon.hh"
 
 #include "api/Server.hh"
-#include "lib/core/ServiceLocator.hh"
+#include "internal/core/ServiceLocator.hh"
 
 namespace hyperion {
 

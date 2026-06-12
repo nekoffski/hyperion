@@ -1,9 +1,9 @@
 #include "Controller.hh"
 
-#include "lib/api/cmd/Ack.hh"
-#include "lib/api/cmd/Error.hh"
-#include "lib/api/cmd/Health.hh"
-#include "lib/core/ServiceLocator.hh"
+#include "internal/api/cmd/Ack.hh"
+#include "internal/api/cmd/Error.hh"
+#include "internal/api/cmd/Health.hh"
+#include "internal/core/ServiceLocator.hh"
 #include "workspace/WorkspaceManager.hh"
 
 namespace hyperion {

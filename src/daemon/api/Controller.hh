@@ -2,12 +2,12 @@
 
 #include <memory>
 
-#include "lib/api/Message.hh"
-#include "lib/api/cmd/Health.hh"
-#include "lib/api/cmd/Workspace.hh"
-#include "lib/core/Concepts.hh"
-#include "lib/core/Core.hh"
-#include "lib/net/Asio.hh"
+#include "internal/api/Message.hh"
+#include "internal/api/cmd/Health.hh"
+#include "internal/api/cmd/Workspace.hh"
+#include "internal/core/Concepts.hh"
+#include "internal/core/Core.hh"
+#include "internal/net/Asio.hh"
 
 namespace hyperion {
 

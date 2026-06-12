@@ -1,9 +1,9 @@
 #pragma once
 
 #include "adapters/DiskWorkspaceRepo.hh"
-#include "lib/core/Config.hh"
-#include "lib/core/Singleton.hh"
-#include "lib/runtime/Thread.hh"
+#include "internal/core/Config.hh"
+#include "internal/core/Singleton.hh"
+#include "internal/runtime/Thread.hh"
 #include "workspace/WorkspaceManager.hh"
 
 namespace hyperion {

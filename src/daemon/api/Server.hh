@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Controller.hh"
-#include "lib/core/Config.hh"
-#include "lib/net/Asio.hh"
-#include "lib/net/TcpServer.hh"
-#include "lib/runtime/Thread.hh"
+#include "internal/core/Config.hh"
+#include "internal/net/Asio.hh"
+#include "internal/net/TcpServer.hh"
+#include "internal/runtime/Thread.hh"
 
 namespace hyperion {
 

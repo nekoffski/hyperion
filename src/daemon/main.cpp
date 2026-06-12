@@ -1,21 +1,23 @@
 #include "Daemon.hh"
 #include "PidFile.hh"
-#include "lib/Platform.hh"
-#include "lib/core/Config.hh"
-#include "lib/core/Core.hh"
-#include "lib/core/Env.hh"
-#include "lib/core/Log.hh"
-#include "lib/core/Scope.hh"
-#include "lib/core/ServiceLocator.hh"
-#include "lib/runtime/Thread.hh"
+#include "internal/Platform.hh"
+#include "internal/core/Config.hh"
+#include "internal/core/Core.hh"
+#include "internal/core/Env.hh"
+#include "internal/core/Log.hh"
+#include "internal/core/Scope.hh"
+#include "internal/core/ServiceLocator.hh"
+#include "internal/runtime/Thread.hh"
 
 using namespace hyperion;
 
 int main() {
-    log::init(log::LoggerOptions{
-        .enableColors = true,
-        .formatPattern = "[%Y-%m-%d %T] [Th: %t] %-5l [hyperion]: %v",
-    });
+    log::init(
+        log::LoggerOptions{
+            .enableColors = true,
+            .formatPattern = "[%Y-%m-%d %T] [Th: %t] %-5l [hyperion]: %v",
+        }
+    );
     log::info("starting hyperion daemon");
     ON_SCOPE_EXIT { log::info("hyperion daemon finished, cya"); };
 

@@ -3,9 +3,9 @@
 #include <CLI/CLI.hpp>
 #include <vector>
 
-#include "lib/core/Concepts.hh"
-#include "lib/core/Core.hh"
-#include "lib/net/Asio.hh"
+#include "internal/core/Concepts.hh"
+#include "internal/core/Core.hh"
+#include "internal/net/Asio.hh"
 
 namespace hyperion {
 

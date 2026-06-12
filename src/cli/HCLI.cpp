@@ -2,8 +2,8 @@
 
 #include "cmd/DaemonCommand.hh"
 #include "cmd/WorkspaceCommand.hh"
-#include "lib/core/Log.hh"
-#include "lib/net/Asio.hh"
+#include "internal/core/Log.hh"
+#include "internal/net/Asio.hh"
 
 namespace hyperion {
 

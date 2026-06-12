@@ -1,11 +1,11 @@
 #pragma once
 
 #include "WorkspaceRepo.hh"
-#include "lib/core/Concepts.hh"
-#include "lib/core/Config.hh"
-#include "lib/core/Core.hh"
-#include "lib/core/FileSystem.hh"
-#include "lib/core/Singleton.hh"
+#include "internal/core/Concepts.hh"
+#include "internal/core/Config.hh"
+#include "internal/core/Core.hh"
+#include "internal/core/FileSystem.hh"
+#include "internal/core/Singleton.hh"
 
 namespace hyperion {
 
