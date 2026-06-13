@@ -81,5 +81,6 @@ DEFINE_ERROR(NetError);
 DEFINE_ERROR(ConfigError);
 DEFINE_ERROR(MessagingError);
 DEFINE_ERROR(WorkspaceError);
+DEFINE_ERROR(KslError);
 
 }  // namespace hyperion

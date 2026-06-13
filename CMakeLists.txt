@@ -14,6 +14,7 @@ find_package(asio REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
 add_subdirectory(src/internal)
+add_subdirectory(src/ksl)
 add_subdirectory(src/daemon)
 add_subdirectory(src/cli)
 

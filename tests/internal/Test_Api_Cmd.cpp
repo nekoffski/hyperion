@@ -20,8 +20,6 @@ using namespace hyperion::api;
     PayloadReader reader_{buf_};                    \
     reader_.read<MessageKindUnderlying>() /* consume kind prefix */
 
-// ─── Ack ─────────────────────────────────────────────────────────────────────
-
 TEST(ApiCmdAck, KindIsCorrect) { EXPECT_EQ(Ack{}.kind(), ApiMessageKind::ack); }
 
 TEST(ApiCmdAck, RoundtripNoPayload) {
@@ -31,8 +29,6 @@ TEST(ApiCmdAck, RoundtripNoPayload) {
     dst.deserialize(reader_);
     EXPECT_EQ(dst.kind(), ApiMessageKind::ack);
 }
-
-// ─── ErrorResponse ───────────────────────────────────────────────────────────
 
 TEST(ApiCmdErrorResponse, KindIsCorrect) {
     EXPECT_EQ(ErrorResponse{}.kind(), ApiMessageKind::errorResponse);
@@ -66,8 +62,6 @@ TEST(ApiCmdErrorResponse, RoundtripEmptyDetails) {
     EXPECT_EQ(dst.code(), ErrorCode::none);
 }
 
-// ─── HealthRequest ───────────────────────────────────────────────────────────
-
 TEST(ApiCmdHealthRequest, KindIsCorrect) {
     EXPECT_EQ(HealthRequest{}.kind(), ApiMessageKind::healthRequest);
 }
@@ -81,8 +75,6 @@ TEST(ApiCmdHealthRequest, RoundtripUuid) {
     EXPECT_EQ(dst.uuid(), "test-uuid-1234");
 }
 
-// ─── HealthResponse ──────────────────────────────────────────────────────────
-
 TEST(ApiCmdHealthResponse, KindIsCorrect) {
     EXPECT_EQ(HealthResponse{}.kind(), ApiMessageKind::healthResponse);
 }
@@ -94,8 +86,6 @@ TEST(ApiCmdHealthResponse, RoundtripUuid) {
     dst.deserialize(reader_);
     EXPECT_EQ(dst.uuid(), "echo-uuid-5678");
 }
-
-// ─── WorkspaceCreateRequest ──────────────────────────────────────────────────
 
 TEST(ApiCmdWorkspaceCreateRequest, KindIsCorrect) {
     EXPECT_EQ(
@@ -111,8 +101,6 @@ TEST(ApiCmdWorkspaceCreateRequest, RoundtripConfigName) {
     EXPECT_EQ(dst.config().name, "my-workspace");
 }
 
-// ─── WorkspaceDeleteRequest ──────────────────────────────────────────────────
-
 TEST(ApiCmdWorkspaceDeleteRequest, KindIsCorrect) {
     EXPECT_EQ(
         WorkspaceDeleteRequest{}.kind(), ApiMessageKind::workspaceDeleteRequest
@@ -127,8 +115,6 @@ TEST(ApiCmdWorkspaceDeleteRequest, RoundtripName) {
     EXPECT_EQ(dst.workspaceName(), "workspace-to-delete");
 }
 
-// ─── WorkspaceListRequest ────────────────────────────────────────────────────
-
 TEST(ApiCmdWorkspaceListRequest, KindIsCorrect) {
     EXPECT_EQ(
         WorkspaceListRequest{}.kind(), ApiMessageKind::workspaceListRequest
@@ -142,8 +128,6 @@ TEST(ApiCmdWorkspaceListRequest, RoundtripNoPayload) {
     dst.deserialize(reader_);
     EXPECT_EQ(dst.kind(), ApiMessageKind::workspaceListRequest);
 }
-
-// ─── WorkspaceListResponse ───────────────────────────────────────────────────
 
 TEST(ApiCmdWorkspaceListResponse, KindIsCorrect) {
     EXPECT_EQ(
@@ -172,8 +156,6 @@ TEST(ApiCmdWorkspaceListResponse, RoundtripMultipleWorkspaces) {
     EXPECT_EQ(dst.workspaces()[2].name, "ws-c");
 }
 
-// ─── JobCreateRequest ────────────────────────────────────────────────────────
-
 TEST(ApiCmdJobCreateRequest, KindIsCorrect) {
     EXPECT_EQ(JobCreateRequest{}.kind(), ApiMessageKind::jobCreateRequest);
 }
@@ -201,8 +183,6 @@ TEST(ApiCmdJobCreateRequest, RoundtripEmptyArgs) {
     EXPECT_TRUE(dst.config().args.empty());
 }
 
-// ─── JobStopRequest ──────────────────────────────────────────────────────────
-
 TEST(ApiCmdJobStopRequest, KindIsCorrect) {
     EXPECT_EQ(JobStopRequest{}.kind(), ApiMessageKind::jobStopRequest);
 }
@@ -215,8 +195,6 @@ TEST(ApiCmdJobStopRequest, RoundtripUuid) {
     EXPECT_EQ(dst.uuid(), "job-uuid-stop");
 }
 
-// ─── JobStatusRequest ────────────────────────────────────────────────────────
-
 TEST(ApiCmdJobStatusRequest, KindIsCorrect) {
     EXPECT_EQ(JobStatusRequest{}.kind(), ApiMessageKind::jobStatusRequest);
 }
@@ -228,8 +206,6 @@ TEST(ApiCmdJobStatusRequest, RoundtripUuid) {
     dst.deserialize(reader_);
     EXPECT_EQ(dst.uuid(), "job-uuid-status");
 }
-
-// ─── JobStatusResponse ───────────────────────────────────────────────────────
 
 TEST(ApiCmdJobStatusResponse, KindIsCorrect) {
     EXPECT_EQ(JobStatusResponse{}.kind(), ApiMessageKind::jobStatusResponse);
@@ -264,8 +240,6 @@ TEST(ApiCmdJobStatusResponse, RoundtripEmptyArgs) {
     EXPECT_TRUE(dst.description().args.empty());
 }
 
-// ─── JobListRequest ──────────────────────────────────────────────────────────
-
 TEST(ApiCmdJobListRequest, KindIsCorrect) {
     EXPECT_EQ(JobListRequest{}.kind(), ApiMessageKind::jobListRequest);
 }
@@ -277,8 +251,6 @@ TEST(ApiCmdJobListRequest, RoundtripNoPayload) {
     dst.deserialize(reader_);
     EXPECT_EQ(dst.kind(), ApiMessageKind::jobListRequest);
 }
-
-// ─── JobListResponse ─────────────────────────────────────────────────────────
 
 TEST(ApiCmdJobListResponse, KindIsCorrect) {
     EXPECT_EQ(JobListResponse{}.kind(), ApiMessageKind::jobListResponse);
