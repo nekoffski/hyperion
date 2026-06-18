@@ -3,7 +3,11 @@ add_library(hyperiond_core STATIC
     "Daemon.cpp"
     # -- api
     "api/Server.cpp"
-    "api/Controller.cpp"
+    "api/Dispatcher.cpp"
+    "api/controllers/WorkspaceController.cpp"
+    "api/controllers/KernelController.cpp"
+    # -- compute
+    "compute/KernelManager.cpp"
     # -- workspace
     "workspace/WorkspaceManager.cpp"
     # -- adapters

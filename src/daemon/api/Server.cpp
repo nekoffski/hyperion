@@ -45,14 +45,13 @@ asio::awaitable<void> Server::onClient(TcpSession& s) {
                 };
                 co_await session.write(response);
             } else {
-                auto response =
-                    co_await m_apiController.handleMessageWithError(*message);
+                auto response = co_await m_apiDispatcher.dispatch(*message);
                 log::expect(
                     response != nullptr,
                     "API controller returned null response for client: {}",
                     session.ident()
                 );
-
+                
                 co_await session.write(*response);
             }
         } catch (const NetError& e) {

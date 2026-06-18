@@ -34,10 +34,10 @@ template <typename T, typename MessageKind, MessageKind MKind>
 class MessageImpl : public Message<MessageKind> {
    public:
     using Kind = MessageKind;
+    constexpr static MessageKind kindValue{MKind};
 
     explicit MessageImpl(const std::string& name) : m_name(name) {}
 
-    static MessageKind sKind() { return MKind; }
     MessageKind kind() const final override { return MKind; }
     std::type_index type() const final override { return typeid(T); }
     std::string_view name() const final override { return m_name; }

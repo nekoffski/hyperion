@@ -5,11 +5,10 @@
 #include "internal/core/Config.hh"
 #include "internal/core/Core.hh"
 #include "internal/core/FileSystem.hh"
-#include "internal/core/Singleton.hh"
 
 namespace hyperion {
 
-class WorkspaceManager : public UniqueInstance<WorkspaceManager> {
+class WorkspaceManager : public NonCopyable, public NonMovable {
    public:
     explicit WorkspaceManager(WorkspaceRepo& repo, const Config& config);
 

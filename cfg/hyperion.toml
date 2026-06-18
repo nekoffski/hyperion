@@ -3,6 +3,9 @@ port = 7788
 pid_file = "~/hyperion/var/run/hyperiond.pid"
 bin_path = "~/hyperion/bin/hyperiond"
 
+[runtime]
+backend = auto
+
 [logging]
 daemon_level = "debug"
 cli_level = "debug"

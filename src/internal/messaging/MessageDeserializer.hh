@@ -12,7 +12,9 @@ namespace hyperion {
 template <typename T, typename MessageKind>
 concept MessageConcept = std::derived_from<T, Message<MessageKind>> &&
                          std::is_enum_v<MessageKind> && requires(T t) {
-                             { t.sKind() } -> std::convertible_to<MessageKind>;
+                             {
+                                 t.kindValue
+                             } -> std::convertible_to<MessageKind>;
                          };
 
 template <typename MessageKind>
@@ -45,7 +47,7 @@ class MessageDeserializer : public NonCopyable, public NonMovable {
     template <typename T>
         requires MessageConcept<T, MessageKind>
     void registerMessage() {
-        auto kind = T::sKind();
+        auto kind = T::kindValue;
         log::expect(
             not m_deserializers.contains(kind),
             "Message kind already registered: {}", fmt::underlying(kind)

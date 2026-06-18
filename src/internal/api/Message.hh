@@ -22,6 +22,10 @@ enum class ApiMessageKind {
     jobListResponse,
     jobStatusRequest,
     jobStatusResponse,
+    kernelCreateRequest,
+    kernelRemoveRequest,
+    kernelListRequest,
+    kernelListResponse,
     count
 };
 

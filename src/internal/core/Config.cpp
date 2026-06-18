@@ -5,6 +5,7 @@
 #include "Env.hh"
 #include "FileSystem.hh"
 #include "Log.hh"
+#include "OS.hh"
 #include "ServiceLocator.hh"
 #include "String.hh"
 
@@ -104,7 +105,29 @@ Config Config::fromEnv(LogConfigFields logConfigFields) {
 
 using StrVec = std::vector<Str>;
 
-static log::Level parseLogLevel(const Str& levelStr) {
+namespace {
+
+ComputeBackendType parseComputeBackendType(const Str& backendStr) {
+    if (backendStr == "auto") {
+        switch (os()) {
+            case OS::windows:
+            case OS::linux:
+                return ComputeBackendType::opencl;
+            case OS::darwin:
+                return ComputeBackendType::cpu;
+        }
+    } else if (backendStr == "cpu") {
+        return ComputeBackendType::cpu;
+    } else if (backendStr == "opencl") {
+        log::expect(
+            os() != OS::darwin, "OpenCL backend is not supported on macOS"
+        );
+        return ComputeBackendType::opencl;
+    }
+    log::panic("Invalid backend type '{}'", backendStr);
+}
+
+log::Level parseLogLevel(const Str& levelStr) {
     static const std::unordered_map<Str, log::Level> levelMap = {
         {"trace", log::Level::trace}, {"debug", log::Level::debug},
         {"info", log::Level::info},   {"warn", log::Level::warn},
@@ -121,6 +144,8 @@ static log::Level parseLogLevel(const Str& levelStr) {
     );
     return it->second;
 }
+
+}  // namespace
 
 void Config::parseFields(const Path& path, LogConfigFields logConfigFields) {
     log::expect(
@@ -140,6 +165,9 @@ void Config::parseFields(const Path& path, LogConfigFields logConfigFields) {
         parseLogLevel(r.read<Str>("logging", "daemon_level"));
     m_logging.daemonFile = r.read<Str>("logging", "daemon_file");
     m_logging.daemonErrorFile = r.read<Str>("logging", "daemon_err");
+
+    m_runtime.backend =
+        parseComputeBackendType(r.read<Str>("runtime", "backend"));
 }
 
 void Config::parseVersionFile(const Path& path) {

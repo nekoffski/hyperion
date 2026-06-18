@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Controller.hh"
+#include "Dispatcher.hh"
 #include "internal/core/Config.hh"
 #include "internal/net/Asio.hh"
 #include "internal/net/TcpServer.hh"
@@ -20,7 +20,7 @@ class Server : public AsioContextOwner, public Thread, public TcpServer {
     asio::awaitable<void> onClient(TcpSession& session) override;
 
     const Config& m_config;
-    Controller m_apiController;
+    Dispatcher m_apiDispatcher;
 };
 
 }  // namespace hyperion

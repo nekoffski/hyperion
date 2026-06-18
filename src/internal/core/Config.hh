@@ -8,6 +8,7 @@
 #include "Core.hh"
 #include "FileSystem.hh"
 #include "Log.hh"
+#include "internal/models/Compute.hh"
 
 namespace hyperion {
 
@@ -34,11 +35,16 @@ class Config {
         Path daemonErrorFile;
     };
 
+    struct Runtime {
+        ComputeBackendType backend;
+    };
+
     const Path& rootPath() const;
 
     const Version& version() const;
     const Daemon& daemon() const;
     const Logging& logging() const;
+    const Runtime& runtime() const;
 
     static Config fromFile(
         const Path& path, LogConfigFields logConfigFields = LogConfigFields::log
@@ -54,6 +60,7 @@ class Config {
     Version m_version;
     Daemon m_daemon;
     Logging m_logging;
+    Runtime m_runtime;
     Path m_rootPath;
 };
 

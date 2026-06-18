@@ -4,6 +4,7 @@
 #include "cmd/Error.hh"
 #include "cmd/Health.hh"
 #include "cmd/Job.hh"
+#include "cmd/Kernel.hh"
 #include "cmd/Workspace.hh"
 
 namespace hyperion::api {
@@ -23,6 +24,10 @@ ApiMessageDeserializer::ApiMessageDeserializer() {
     registerMessage<JobListResponse>();
     registerMessage<JobStatusRequest>();
     registerMessage<JobStatusResponse>();
+    registerMessage<KernelCreateRequest>();
+    registerMessage<KernelRemoveRequest>();
+    // registerMessage<KernelListRequest>();
+    // registerMessage<KernelListResponse>();
 }
 
 }  // namespace hyperion::api

@@ -6,6 +6,7 @@ add_library(hyperion SHARED
     "api/cmd/Error.cpp"
     "api/cmd/Job.cpp"
     "api/cmd/Workspace.cpp"
+    "api/cmd/Kernel.cpp"
     "api/MessageDeserializer.cpp"
     "api/Session.cpp"
     # -- core
@@ -18,6 +19,7 @@ add_library(hyperion SHARED
     "core/Error.cpp"
     "core/FileSystem.cpp"
     "core/Random.cpp"
+    "core/OS.cpp"
     "core/Profiler.cpp"
     # -- runtime
     "runtime/Thread.cpp"
