@@ -42,7 +42,8 @@ void File::append(const std::string& content) {
     std::ofstream file(m_path.str(), std::ios::app);
     if (not file.is_open()) {
         throw FileSystemError{
-            ErrorCode::fileNotFound, "Failed to open file for appending"
+            ErrorCode::fileNotFound, "Failed to open file for appending: {}",
+            m_path.str()
         };
     }
     file << content;
@@ -52,7 +53,8 @@ void File::write(const std::string& content) {
     std::ofstream file(m_path.str(), std::ios::trunc);
     if (not file.is_open()) {
         throw FileSystemError{
-            ErrorCode::fileNotFound, "Failed to open file for writing"
+            ErrorCode::fileNotFound, "Failed to open file for writing: {}",
+            m_path.str()
         };
     }
     file << content;
@@ -62,7 +64,8 @@ std::string File::read() const {
     std::ifstream file(m_path.str());
     if (not file.is_open()) {
         throw FileSystemError{
-            ErrorCode::fileNotFound, "Failed to open file for reading"
+            ErrorCode::fileNotFound, "Failed to open file for reading: {}",
+            m_path.str()
         };
     }
     std::stringstream buffer;
@@ -74,7 +77,8 @@ std::vector<std::string> File::readLines() const {
     std::ifstream file(m_path.str());
     if (not file.is_open()) {
         throw FileSystemError{
-            ErrorCode::fileNotFound, "Failed to open file for reading"
+            ErrorCode::fileNotFound, "Failed to open file for reading: {}",
+            m_path.str()
         };
     }
     std::vector<std::string> lines;

@@ -19,4 +19,4 @@ add_subdirectory(src/daemon)
 add_subdirectory(src/cli)
 
 enable_testing()
-add_subdirectory(tests)
+add_subdirectory(tests-unit)

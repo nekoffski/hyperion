@@ -8,7 +8,7 @@ namespace hyperion {
 namespace {
 
 Path workspacesPath(const Config& config) {
-    return Path::join(config.rootPath(), "var/internal/workspaces");
+    return Path::join(config.rootPath(), "var/lib/workspaces");
 }
 
 }  // namespace

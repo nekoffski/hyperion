@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "controllers/KernelController.hh"
 #include "controllers/WorkspaceController.hh"
 #include "internal/api/Message.hh"
 #include "internal/api/cmd/Health.hh"
@@ -29,5 +30,6 @@ class Dispatcher : public NonCopyable, public NonMovable {
     );
 
     WorkspaceController m_workspaceController;
+    // KernelController m_kernelController;
 };
 }  // namespace hyperion

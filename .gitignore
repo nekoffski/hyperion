@@ -30,3 +30,6 @@ Thumbs.db
 
 TODO.md
 DESIGN.md
+
+__pycache__
+venv
