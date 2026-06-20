@@ -28,7 +28,6 @@ class Dispatcher : public NonCopyable, public NonMovable {
         const api::HealthRequest& req
     );
 
-   private:
     WorkspaceController m_workspaceController;
 };
 }  // namespace hyperion
